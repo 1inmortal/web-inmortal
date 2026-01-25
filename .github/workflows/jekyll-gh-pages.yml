@@ -35,6 +35,9 @@ jobs:
 
       - name: Build
         working-directory: ./portfolio-react
+        env:
+          # Pasar el nombre del repositorio para configurar el base path
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: npm run build
 
       - name: Setup Pages
