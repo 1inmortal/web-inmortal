@@ -1,0 +1,290 @@
+/* Tailwind CSS Directives */
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   INMORTAL OS - DESIGN SYSTEM (CSS COMPLETO)
+   ------------------------------------------------------------------
+   Este archivo contiene las variables, animaciones y clases base 
+   que replican el diseño "Dark Cyberpunk/Glass" del portafolio.
+*/
+
+:root {
+  /* --- PALETA DE COLORES (Basada en Tailwind Slate & Cyan) --- */
+  
+  /* Fondos Oscuros (Dark Mode) */
+  --bg-main: #020617;       /* slate-950 */
+  --bg-card: rgba(15, 23, 42, 0.5); /* slate-900 con opacidad */
+  --bg-secondary: #0f172a;  /* slate-900 */
+  
+  /* Bordes */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-focus: rgba(6, 182, 212, 0.3);
+  
+  /* Acentos (Cyan Neon) */
+  --primary: #06b6d4;       /* cyan-500 */
+  --primary-glow: #22d3ee;  /* cyan-400 */
+  --primary-dim: rgba(6, 182, 212, 0.1);
+  
+  /* Texto */
+  --text-main: #e2e8f0;     /* slate-200 */
+  --text-muted: #94a3b8;    /* slate-400 */
+  
+  /* Fuentes */
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-mono: 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+/* --- CONFIGURACIÓN BASE --- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Color de selección de texto */
+::selection {
+  background-color: rgba(6, 182, 212, 0.3); /* cyan-500/30 */
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: rgba(6, 182, 212, 0.3);
+  color: #fff;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b; /* slate-800 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155; /* slate-700 */
+}
+
+/* --- CLASES DE UTILIDAD (EFECTOS VISUALES) --- */
+
+/* Efecto Glassmorphism (Cristal) */
+.glass-card {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem; /* 16px */
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.15); /* Glow sutil */
+}
+
+/* Textos con Gradiente */
+.text-gradient {
+  background: linear-gradient(to right, var(--primary-glow), #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Botones Neón */
+.btn-neon {
+  background-color: var(--primary-dim);
+  color: var(--primary-glow);
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-neon:hover {
+  background-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Navbar Sticky con Blur */
+.navbar-scrolled {
+  background-color: rgba(2, 6, 23, 0.8); /* slate-950/80 */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* --- ANIMACIONES (KEYFRAMES) --- */
+
+/* Fade In Up (Entrada suave desde abajo) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Fade In Left (Entrada suave desde la izquierda) */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Pulse (Para indicadores de estado) */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px var(--primary);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 15px var(--primary);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Gradient X (Movimiento de fondo) */
+@keyframes gradient-x {
+  0% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+  100% { 
+    background-position: 0% 50%; 
+  }
+}
+
+/* --- GRID BACKGROUND (Fondo estilo cyber) --- */
+.bg-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* --- UTILIDADES PARA SCROLL REVEAL --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- ESTILOS ADICIONALES PARA COMPONENTES --- */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-glow);
+}
+
+/* Inputs y Textareas */
+input,
+textarea {
+  font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Smooth transitions para elementos interactivos */
+button,
+a,
+.card {
+  transition: all 0.3s ease;
+}
+
+/* Efectos hover mejorados */
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(6, 182, 212, 0.2);
+}
+
+/* Glow effect */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.glow-cyan:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+}

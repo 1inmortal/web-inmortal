@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "year": "2023 - Presente",
+    "status": "ACTIVE PROCESS",
+    "role": "Ingeniero Full-Stack Senior",
+    "company": "Consultoría Web3 & IA",
+    "description": "Liderando la arquitectura de microservicios para plataformas DeFi. Implementación de agentes autónomos con LLMs.",
+    "technologies": ["Solidity", "React", "AWS"]
+  },
+  {
+    "id": 2,
+    "year": "2021 - 2023",
+    "status": "ARCHIVED",
+    "role": "Frontend Developer",
+    "company": "Creative Studio Agency",
+    "description": "Desarrollo de experiencias inmersivas premiadas en Awwwards. Optimización extrema de rendimiento WebGL.",
+    "technologies": ["Three.js", "GSAP", "Vue"]
+  },
+  {
+    "id": 3,
+    "year": "2019 - 2021",
+    "status": "ARCHIVED",
+    "role": "Junior Web Developer",
+    "company": "StartUp Alpha",
+    "description": "Implementación de landing pages y mantenimiento de APIs REST.",
+    "technologies": ["React", "Node.js", "MongoDB"]
+  }
+]

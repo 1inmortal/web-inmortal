@@ -1,23 +1,15 @@
-# Excluir código fuente - Solo subir archivos compilados (dist/)
+# Configuración para GitHub Pages
+# El código fuente (src/) debe estar en el repo para que GitHub Actions pueda construir
+# GitHub Pages solo servirá los archivos compilados de dist/
 
-# Excluir TODO el código fuente y archivos de desarrollo de portfolio-react
-portfolio-react/src/
-portfolio-react/public/
-portfolio-react/*.jsx
-portfolio-react/*.js
-portfolio-react/*.ts
-portfolio-react/*.tsx
-portfolio-react/*.html
-portfolio-react/package.json
-portfolio-react/package-lock.json
-portfolio-react/vite.config.js
-portfolio-react/tailwind.config.js
-portfolio-react/postcss.config.js
-portfolio-react/eslint.config.js
+# Excluir solo archivos temporales y dependencias
 portfolio-react/node_modules/
 portfolio-react/.vscode/
 portfolio-react/.idea/
-portfolio-react/.gitignore
+portfolio-react/dist/  # Se genera automáticamente en el workflow
+
+# El código fuente (src/) y archivos de configuración se INCLUYEN
+# para que GitHub Actions pueda construir el proyecto automáticamente
 
 # Logs y archivos temporales
 *.log
@@ -33,10 +25,19 @@ yarn-error.log*
 *.sln
 *.sw?
 
-# INCLUIR solo el directorio dist/ compilado y documentación de despliegue
+# INCLUIR archivos necesarios para el build y despliegue
 !portfolio-react/dist/
 !portfolio-react/dist/**
 !portfolio-react/DEPLOY.md
+!portfolio-react/package.json
+!portfolio-react/package-lock.json
+!portfolio-react/vite.config.js
+!portfolio-react/tailwind.config.js
+!portfolio-react/postcss.config.js
+!portfolio-react/eslint.config.js
+!portfolio-react/index.html
+!.github/
+!.github/**
 
 # Excluir dist antiguo en la raíz (si existe)
 /dist/

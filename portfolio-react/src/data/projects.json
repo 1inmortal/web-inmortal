@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "EcoVerse DEX",
+    "category": "Web3 / DeFi",
+    "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1000&auto=format&fit=crop",
+    "description": "Plataforma de intercambio descentralizado con auditoría automatizada por IA.",
+    "technologies": ["Solidity", "React", "Ethers.js"],
+    "status": "LIVE",
+    "link": "#"
+  },
+  {
+    "id": 2,
+    "title": "Neural Studio",
+    "category": "AI / SaaS",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
+    "description": "Generador de assets para videojuegos utilizando Stable Diffusion API.",
+    "technologies": ["Python", "FastAPI", "Next.js"],
+    "status": "BETA",
+    "link": "#"
+  },
+  {
+    "id": 3,
+    "title": "Metaverse Core",
+    "category": "WebGL / 3D",
+    "image": "https://images.unsplash.com/photo-1633356122544-1348c4c6e0b8?q=80&w=1000&auto=format&fit=crop",
+    "description": "Motor de renderizado ligero para experiencias VR en el navegador.",
+    "technologies": ["Three.js", "WebGL", "Socket.io"],
+    "status": "STABLE",
+    "link": "#"
+  },
+  {
+    "id": 4,
+    "title": "Video Sync Panel",
+    "category": "CV / Video Sync",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
+    "description": "Sistema interactivo de análisis de video con checkpoints y seguimiento en tiempo real.",
+    "technologies": ["JavaScript", "HTML5", "Video API"],
+    "status": "INTERACTIVE",
+    "link": "#"
+  },
+  {
+    "id": 5,
+    "title": "Inmortal OS Dashboard",
+    "category": "React / Dashboard",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
+    "description": "Panel de administración con visualización de datos en tiempo real.",
+    "technologies": ["React", "TypeScript", "Chart.js"],
+    "status": "LIVE",
+    "link": "#"
+  },
+  {
+    "id": 6,
+    "title": "E-Commerce Nexus",
+    "category": "Next.js / Stripe",
+    "image": "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1000&auto=format&fit=crop",
+    "description": "Plataforma de comercio electrónico headless con pagos integrados.",
+    "technologies": ["Next.js", "Stripe", "PostgreSQL"],
+    "status": "LIVE",
+    "link": "#"
+  }
+]

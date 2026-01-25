@@ -1,0 +1,40 @@
+# Configuración para GitHub Actions
+# El código fuente (src/) se INCLUYE en el repo para que GitHub Actions pueda construir
+# GitHub Pages solo servirá los archivos compilados de dist/
+
+# Archivos de configuración se incluyen para el build en GitHub Actions
+# (package.json, vite.config.js, etc. deben estar en el repo)
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencias
+node_modules
+
+# Build temporal (si se genera fuera de dist)
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# README y documentación de desarrollo (opcional - descomenta si quieres excluirlos)
+# README.md
+
+# INCLUIR dist/ - Los archivos compilados se subirán
+!dist/
+!dist/**

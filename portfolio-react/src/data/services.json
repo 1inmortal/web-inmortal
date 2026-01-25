@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "title": "Desarrollo Web3",
+    "icon": "blockchain",
+    "description": "Construcción de dApps, smart contracts y ecosistemas descentralizados.",
+    "benefits": [
+      "Arquitectura completa de contratos (ERC-20 / ERC-721 / ERC-1155)",
+      "Dashboards de administración y paneles analíticos en tiempo real",
+      "Integración con redes principales y testnets (Ethereum, Polygon, etc.)",
+      "Automatización de despliegues con pipelines CI/CD para Web3"
+    ],
+    "technologies": ["Solidity", "Hardhat", "Ethers.js", "DeFi / dApps"]
+  },
+  {
+    "id": 2,
+    "title": "IA Generativa",
+    "icon": "brain",
+    "description": "Integración de modelos de IA para automatización y generación de contenido.",
+    "benefits": [
+      "Diseño e integración de APIs de IA (OpenAI, Stable Diffusion, etc.)",
+      "Orquestación de agentes autónomos para flujos de negocio complejos",
+      "Sistemas de recomendación y personalización de contenido",
+      "Paneles para monitorizar calidad, coste y latencia de los modelos"
+    ],
+    "technologies": ["Python", "FastAPI", "LangChain", "LLMs"]
+  },
+  {
+    "id": 3,
+    "title": "Experiencias 3D",
+    "icon": "cube",
+    "description": "Desarrollo de interfaces inmersivas con Three.js y WebGL.",
+    "benefits": [
+      "Landing pages 3D con micro-interacciones y narrativa visual",
+      "Viewers de producto en tiempo real (360º, zoom, materiales PBR)",
+      "Sistemas de partículas, cámaras guiadas y transiciones suaves",
+      "Optimización de FPS y carga progresiva para dispositivos móviles"
+    ],
+    "technologies": ["Three.js", "WebGL", "R3F", "GSAP"]
+  },
+  {
+    "id": 4,
+    "title": "Desarrollo Web",
+    "icon": "globe",
+    "description": "Sitios web modernos, rápidos y SEO-friendly usando Next.js y React.",
+    "benefits": [
+      "Arquitectura escalable y mantenible",
+      "Optimización de rendimiento y Core Web Vitals",
+      "SEO avanzado y mejoras de accesibilidad",
+      "Integración con servicios de terceros y APIs"
+    ],
+    "technologies": ["React", "Next.js", "TypeScript", "Tailwind CSS"]
+  }
+]
