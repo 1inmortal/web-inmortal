@@ -4,10 +4,16 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 // Detectar el base path para GitHub Pages
 function getBasePath() {
-  // En GitHub Actions, usar el nombre del repositorio
-  // GITHUB_REPOSITORY tiene formato: usuario/repositorio
+  // En GitHub Actions, detectar si es sitio de usuario o proyecto
   if (process.env.GITHUB_REPOSITORY) {
-    const repoName = process.env.GITHUB_REPOSITORY.split('/')[1]
+    const [username, repoName] = process.env.GITHUB_REPOSITORY.split('/')
+    
+    // Si el repositorio es username.github.io, usar raíz
+    // Si es un repositorio de proyecto, usar /repositorio/
+    if (repoName === `${username}.github.io`) {
+      return '/'
+    }
+    // Repositorio de proyecto
     return `/${repoName}/`
   }
   // Para desarrollo local, usar raíz
