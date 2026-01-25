@@ -1,0 +1,42 @@
+# Excluir código fuente - Solo subir archivos compilados (dist/)
+
+# Excluir TODO el código fuente y archivos de desarrollo de portfolio-react
+portfolio-react/src/
+portfolio-react/public/
+portfolio-react/*.jsx
+portfolio-react/*.js
+portfolio-react/*.ts
+portfolio-react/*.tsx
+portfolio-react/*.html
+portfolio-react/package.json
+portfolio-react/package-lock.json
+portfolio-react/vite.config.js
+portfolio-react/tailwind.config.js
+portfolio-react/postcss.config.js
+portfolio-react/eslint.config.js
+portfolio-react/node_modules/
+portfolio-react/.vscode/
+portfolio-react/.idea/
+portfolio-react/.gitignore
+
+# Logs y archivos temporales
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del sistema
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# INCLUIR solo el directorio dist/ compilado y documentación de despliegue
+!portfolio-react/dist/
+!portfolio-react/dist/**
+!portfolio-react/DEPLOY.md
+
+# Excluir dist antiguo en la raíz (si existe)
+/dist/
