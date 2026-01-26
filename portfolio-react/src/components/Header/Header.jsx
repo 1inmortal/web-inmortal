@@ -23,9 +23,9 @@ const Header = () => {
     const GITHUB_USER = '1inmortal';
     const REPO_NAME = 'web-inmortal';
     
-    // Ruta donde está la app de certificados en el repositorio
-    // Si los certificados están en otra ubicación, actualiza esta constante
-    const CERTIFICATES_PATH = 'Evidencia/certificates-app/dist';
+    // Ruta donde está la app de certificados
+    // Los certificados se copian a portfolio-react/dist/certificados/ durante el build
+    const CERTIFICATES_PATH = 'certificados';
     
     const hostname = window.location.hostname;
     
@@ -34,8 +34,13 @@ const Header = () => {
       const parts = hostname.split('.');
       if (parts.length >= 2) {
         const githubUser = parts[0];
-        // Incluir index.html al final para que GitHub Pages sirva el archivo correctamente
-        return `https://${githubUser}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}/index.html`;
+        // Obtener el repositorio desde el pathname o usar el configurado
+        const pathname = window.location.pathname;
+        const pathSegments = pathname.split('/').filter(p => p);
+        const currentRepo = pathSegments[0] || REPO_NAME;
+        
+        // Construir URL: usuario.github.io/repositorio/certificados/index.html
+        return `https://${githubUser}.github.io/${currentRepo}/${CERTIFICATES_PATH}/index.html`;
       }
     }
     

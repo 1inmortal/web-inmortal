@@ -33,12 +33,24 @@ jobs:
         working-directory: ./portfolio-react
         run: npm ci
 
-      - name: Build
+      - name: Build Portfolio
         working-directory: ./portfolio-react
         env:
           # Pasar el nombre del repositorio para configurar el base path
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: npm run build
+
+      - name: Build Certificates App
+        working-directory: ./Evidencia/certificates-app
+        run: |
+          npm ci
+          npm run build
+
+      - name: Copy Certificates to Portfolio Dist
+        run: |
+          # Copiar los archivos de certificados al dist del portfolio
+          mkdir -p portfolio-react/dist/certificados
+          cp -r Evidencia/certificates-app/dist/* portfolio-react/dist/certificados/
 
       - name: Create .nojekyll file
         working-directory: ./portfolio-react/dist
