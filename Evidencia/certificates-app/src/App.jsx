@@ -253,11 +253,9 @@ const translations = {
   es: {
     nav: {
       inicio: "Inicio",
-      experiencia: "Experiencia",
-      stack: "Stack",
-      proyectos: "Proyectos",
-      servicios: "Servicios",
-      contacto: "Contacto"
+      boveda: "Bóveda de Certificados",
+      ruta: "Ruta de Aprendizaje",
+      colaborar: "¿Listo para colaborar?"
     },
     hero: {
       badge: "Profesional Verificado",
@@ -322,11 +320,9 @@ const translations = {
   en: {
     nav: {
       inicio: "Home",
-      experiencia: "Experience",
-      stack: "Stack",
-      proyectos: "Projects",
-      servicios: "Services",
-      contacto: "Contact"
+      boveda: "Certificate Vault",
+      ruta: "Learning Path",
+      colaborar: "Ready to collaborate?"
     },
     hero: {
       badge: "Verified Professional",
@@ -792,11 +788,9 @@ const PortfolioApp = () => {
             alignItems: 'center'
           }}>
             <NavLink href={getMainPageUrl('#inicio')}>{t.nav.inicio}</NavLink>
-            <NavLink href="#timeline">{t.nav.experiencia}</NavLink>
-            <NavLink href="#skills">{t.nav.stack}</NavLink>
-            <NavLink href="#explorer">{t.nav.proyectos}</NavLink>
-            <NavLink href="#explorer">{t.nav.servicios}</NavLink>
-            <NavLink href="#explorer">{t.nav.contacto}</NavLink>
+            <NavLink href="#explorer">{t.nav.boveda}</NavLink>
+            <NavLink href="#timeline">{t.nav.ruta}</NavLink>
+            <NavLink href="#colaborar">{t.nav.colaborar}</NavLink>
             <LanguageToggle currentLang={language} onLanguageChange={handleLanguageChange} />
           </nav>
           
@@ -853,11 +847,9 @@ const PortfolioApp = () => {
             gap: '20px'
           }}>
             <NavLink href={getMainPageUrl('#inicio')} onClick={() => setIsMobileMenuOpen(false)}>{t.nav.inicio}</NavLink>
-            <NavLink href="#timeline" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.experiencia}</NavLink>
-            <NavLink href="#skills" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.stack}</NavLink>
-            <NavLink href="#explorer" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.proyectos}</NavLink>
-            <NavLink href="#explorer" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.servicios}</NavLink>
-            <NavLink href="#explorer" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.contacto}</NavLink>
+            <NavLink href="#explorer" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.boveda}</NavLink>
+            <NavLink href="#timeline" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.ruta}</NavLink>
+            <NavLink href="#colaborar" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.colaborar}</NavLink>
             <div style={{ paddingTop: '10px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
               <LanguageToggle currentLang={language} onLanguageChange={handleLanguageChange} />
             </div>
@@ -1013,7 +1005,7 @@ const PortfolioApp = () => {
         </section>
 
         {/* --- I. FOOTER --- */}
-        <footer className="pt-20 pb-8 text-center">
+        <footer id="colaborar" className="pt-20 pb-8 text-center">
            <div className="container mx-auto px-4">
               <h2 className="text-2xl font-bold text-white mb-6">{t.footer.title}</h2>
               <p className="text-slate-400 mb-8 max-w-md mx-auto">
