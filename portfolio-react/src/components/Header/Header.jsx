@@ -18,40 +18,42 @@ const Header = () => {
       return 'http://localhost:5174';
     }
     
-    // Para producción en GitHub Pages
-    // ⚠️ CONFIGURACIÓN: Actualiza el nombre del repositorio donde esté desplegada tu app de certificados
-    // Opciones:
-    // 1. Si está en un repositorio separado: 'certificates-app', 'certificados', etc.
-    // 2. Si está en el mismo repositorio pero en otra carpeta: usar ruta relativa
-    // 3. Si está en otro servicio: usar la URL completa (ej: 'https://certificados.vercel.app')
-    
-    const CERTIFICATES_REPO_NAME = 'certificates-app'; // ⚠️ CAMBIA ESTO con el nombre real del repo
+    // Para producción en GitHub Pages - mismo repositorio
+    // ⚠️ CONFIGURACIÓN: Actualiza la ruta donde esté desplegada la app de certificados
+    // Ejemplos:
+    // - Si está en 'Evidencia/certificates-app/dist': 'Evidencia/certificates-app/dist'
+    // - Si está en 'certificates-app/dist': 'certificates-app/dist'
+    // - Si está en la raíz del repo: ''
+    const CERTIFICATES_PATH = 'Evidencia/certificates-app/dist'; // ⚠️ CAMBIA ESTO con la ruta real
     
     const hostname = window.location.hostname;
+    const pathname = window.location.pathname;
     
     // Si está en GitHub Pages
     if (hostname.includes('github.io')) {
       const parts = hostname.split('.');
       if (parts.length >= 2) {
         const githubUser = parts[0];
-        // Si el sitio actual está en un subdirectorio (ej: usuario.github.io/web-inmortal)
-        const pathname = window.location.pathname;
-        const currentRepo = pathname.split('/').filter(p => p)[0]; // Primer segmento de la ruta
         
-        // Si está en el mismo repositorio, usar ruta relativa
-        // Si está en repositorio diferente, usar URL completa
-        if (currentRepo && currentRepo !== CERTIFICATES_REPO_NAME) {
-          // Repositorio diferente - usar URL completa
-          return `https://${githubUser}.github.io/${CERTIFICATES_REPO_NAME}`;
-        } else {
-          // Mismo repositorio o sitio de usuario - usar ruta relativa o absoluta según corresponda
-          return `https://${githubUser}.github.io/${CERTIFICATES_REPO_NAME}`;
-        }
+        // Obtener el repositorio actual desde la URL
+        // Ejemplo: "1inmortal.github.io/web-inmortal/" -> "web-inmortal"
+        const pathSegments = pathname.split('/').filter(p => p);
+        const currentRepo = pathSegments[0] || '';
+        
+        // Construir la URL base del repositorio
+        const baseUrl = currentRepo 
+          ? `https://${githubUser}.github.io/${currentRepo}` 
+          : `https://${githubUser}.github.io`;
+        
+        // Como están en el mismo repositorio, usar ruta relativa desde la base
+        return CERTIFICATES_PATH 
+          ? `${baseUrl}/${CERTIFICATES_PATH}` 
+          : baseUrl;
       }
     }
     
     // Fallback: URL por defecto
-    return `https://1inmortal.github.io/${CERTIFICATES_REPO_NAME}`;
+    return `https://1inmortal.github.io/web-inmortal/${CERTIFICATES_PATH}`;
   };
 
   // Enlaces de navegación
