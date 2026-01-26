@@ -34,13 +34,13 @@ const Header = () => {
       const parts = hostname.split('.');
       if (parts.length >= 2) {
         const githubUser = parts[0];
-        // Agregar barra final para que GitHub Pages sirva el index.html correctamente
-        return `https://${githubUser}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}/`;
+        // Incluir index.html al final para que GitHub Pages sirva el archivo correctamente
+        return `https://${githubUser}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}/index.html`;
       }
     }
     
     // Fallback: URL por defecto
-    return `https://${GITHUB_USER}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}/`;
+    return `https://${GITHUB_USER}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}/index.html`;
   };
 
   // Enlaces de navegación
