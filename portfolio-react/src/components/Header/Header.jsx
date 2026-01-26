@@ -112,7 +112,11 @@ const Header = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors uppercase tracking-wide flex items-center gap-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = link.href;
+                  }}
+                  className="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors uppercase tracking-wide flex items-center gap-1 cursor-pointer"
                 >
                   {link.name}
                   <ExternalLink size={14} className="opacity-70" />
@@ -178,8 +182,12 @@ const Header = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-left text-slate-300 hover:text-cyan-400 py-2 transition-colors flex items-center gap-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileMenuOpen(false);
+                    window.location.href = link.href;
+                  }}
+                  className="text-left text-slate-300 hover:text-cyan-400 py-2 transition-colors flex items-center gap-2 cursor-pointer"
                 >
                   {link.name}
                   <ExternalLink size={14} className="opacity-70" />
