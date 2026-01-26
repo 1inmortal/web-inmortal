@@ -18,25 +18,40 @@ const Header = () => {
       return 'http://localhost:5174';
     }
     
-    // Para producción en GitHub Pages - detectar automáticamente el usuario
+    // Para producción en GitHub Pages
+    // ⚠️ CONFIGURACIÓN: Actualiza el nombre del repositorio donde esté desplegada tu app de certificados
+    // Opciones:
+    // 1. Si está en un repositorio separado: 'certificates-app', 'certificados', etc.
+    // 2. Si está en el mismo repositorio pero en otra carpeta: usar ruta relativa
+    // 3. Si está en otro servicio: usar la URL completa (ej: 'https://certificados.vercel.app')
+    
+    const CERTIFICATES_REPO_NAME = 'certificates-app'; // ⚠️ CAMBIA ESTO con el nombre real del repo
+    
     const hostname = window.location.hostname;
     
-    // Si está en GitHub Pages (ej: usuario.github.io o usuario.github.io/repo)
+    // Si está en GitHub Pages
     if (hostname.includes('github.io')) {
-      // Extraer el usuario de GitHub desde el hostname
-      // Ejemplo: "usuario.github.io" -> "usuario"
       const parts = hostname.split('.');
       if (parts.length >= 2) {
         const githubUser = parts[0];
-        // ⚠️ ACTUALIZA 'certificates-app' con el nombre real del repositorio donde esté desplegada
-        // Si está en el mismo repositorio pero en otra carpeta, ajusta la ruta
-        return `https://${githubUser}.github.io/certificates-app`;
+        // Si el sitio actual está en un subdirectorio (ej: usuario.github.io/web-inmortal)
+        const pathname = window.location.pathname;
+        const currentRepo = pathname.split('/').filter(p => p)[0]; // Primer segmento de la ruta
+        
+        // Si está en el mismo repositorio, usar ruta relativa
+        // Si está en repositorio diferente, usar URL completa
+        if (currentRepo && currentRepo !== CERTIFICATES_REPO_NAME) {
+          // Repositorio diferente - usar URL completa
+          return `https://${githubUser}.github.io/${CERTIFICATES_REPO_NAME}`;
+        } else {
+          // Mismo repositorio o sitio de usuario - usar ruta relativa o absoluta según corresponda
+          return `https://${githubUser}.github.io/${CERTIFICATES_REPO_NAME}`;
+        }
       }
     }
     
-    // Fallback: URL por defecto (actualiza con tu URL real)
-    // ⚠️ ACTUALIZA esta URL con la dirección real donde esté desplegada tu app de certificados
-    return 'https://tu-usuario.github.io/certificates-app';
+    // Fallback: URL por defecto
+    return `https://1inmortal.github.io/${CERTIFICATES_REPO_NAME}`;
   };
 
   // Enlaces de navegación
