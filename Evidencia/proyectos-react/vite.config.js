@@ -17,9 +17,10 @@ function getBasePath() {
     // Repositorio de proyecto - los archivos están en /repositorio/proyectos/
     return `/${repoName}/proyectos/`
   }
-  // Para desarrollo local, usar rutas relativas para que funcione en subcarpeta
-  // Esto permite que funcione tanto en desarrollo como en producción
-  return './'
+  // Para desarrollo local, usar el base path de producción para que coincida
+  // Esto asegura que el dist funcione correctamente en GitHub Pages
+  // En desarrollo local, usar el mismo base path que en producción
+  return '/web-inmortal/proyectos/'
 }
 
 export default defineConfig({
