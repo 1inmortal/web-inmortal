@@ -107,13 +107,11 @@ const Header = () => {
             const isExternal = isExternalLink(link.href);
             
             if (isExternal) {
-              // Enlace externo - usar <a> tag
+              // Enlace externo - navegar en la misma ventana
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors uppercase tracking-wide flex items-center gap-1"
                 >
                   {link.name}
@@ -175,13 +173,11 @@ const Header = () => {
             const isExternal = isExternalLink(link.href);
             
             if (isExternal) {
-              // Enlace externo - usar <a> tag
+              // Enlace externo - navegar en la misma ventana
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-left text-slate-300 hover:text-cyan-400 py-2 transition-colors flex items-center gap-2"
                 >
