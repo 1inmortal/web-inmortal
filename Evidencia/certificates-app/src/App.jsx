@@ -252,7 +252,7 @@ const TIMELINE_EVENTS = [
 const translations = {
   es: {
     nav: {
-      sobreMi: "Sobre Mí",
+      inicio: "Inicio",
       experiencia: "Experiencia",
       stack: "Stack",
       proyectos: "Proyectos",
@@ -321,7 +321,7 @@ const translations = {
   },
   en: {
     nav: {
-      sobreMi: "About Me",
+      inicio: "Home",
       experiencia: "Experience",
       stack: "Stack",
       proyectos: "Projects",
@@ -759,7 +759,7 @@ const PortfolioApp = () => {
             gap: '30px',
             alignItems: 'center'
           }}>
-            <NavLink href="../../../index.html">{t.nav.sobreMi}</NavLink>
+            <NavLink href="../../../index.html#inicio">{t.nav.inicio}</NavLink>
             <NavLink href="#experiencia">{t.nav.experiencia}</NavLink>
             <NavLink href="#stack">{t.nav.stack}</NavLink>
             <NavLink href="#proyectos">{t.nav.proyectos}</NavLink>
@@ -820,7 +820,7 @@ const PortfolioApp = () => {
             flexDirection: 'column',
             gap: '20px'
           }}>
-            <NavLink href="../../../index.html" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.sobreMi}</NavLink>
+            <NavLink href="../../../index.html#inicio" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.inicio}</NavLink>
             <NavLink href="#experiencia" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.experiencia}</NavLink>
             <NavLink href="#stack" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.stack}</NavLink>
             <NavLink href="#proyectos" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.proyectos}</NavLink>
