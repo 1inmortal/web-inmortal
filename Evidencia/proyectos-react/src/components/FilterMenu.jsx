@@ -43,12 +43,14 @@ const FilterMenu = ({
       const parts = hostname.split('.');
       if (parts.length >= 2) {
         const githubUser = parts[0];
-        // Obtener el repositorio desde el pathname o usar el configurado
+        // Obtener el repositorio desde el pathname
+        // El pathname puede ser: /web-inmortal/proyectos/ o /web-inmortal/
         const pathname = window.location.pathname;
         const pathSegments = pathname.split('/').filter(p => p);
+        // El primer segmento siempre es el nombre del repositorio
         const currentRepo = pathSegments[0] || REPO_NAME;
         
-        // Construir URL: usuario.github.io/repositorio/cenaduria/index.html
+        // Construir URL absoluta: usuario.github.io/repositorio/cenaduria/index.html
         return `https://${githubUser}.github.io/${currentRepo}/${CENADURIA_PATH}/index.html`;
       }
     }
@@ -122,7 +124,14 @@ const FilterMenu = ({
         className="filter-button external-link"
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = getLasFloresUrl();
+          const url = getLasFloresUrl();
+          // Asegurar que la URL sea absoluta
+          if (url.startsWith('http://') || url.startsWith('https://')) {
+            window.location.href = url;
+          } else {
+            // Si por alguna razón no es absoluta, construirla
+            window.location.href = `https://1inmortal.github.io/web-inmortal/cenaduria/index.html`;
+          }
         }}
         aria-label="Las Flores Restaurante"
         title="Las Flores Restaurante"
