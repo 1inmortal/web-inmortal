@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Terminal, Github, Twitter, Linkedin, ExternalLink } from 'lucide-react';
+import { Menu, X, Github, Twitter, Linkedin, ExternalLink } from 'lucide-react';
 import './Header.module.css';
 
 /**
@@ -206,23 +206,9 @@ const Header = () => {
             letterSpacing: '-0.05em',
             color: '#f5f5f5',
             textDecoration: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
+            cursor: 'pointer'
           }}
         >
-          <div style={{
-            width: '32px',
-            height: '32px',
-            background: 'linear-gradient(to bottom right, #06b6d4, #2563eb)',
-            borderRadius: '4px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <Terminal size={18} color="#ffffff" />
-          </div>
           INMORTAL<span style={{ color: '#8b5cf6' }}>_OS</span>
         </div>
 
