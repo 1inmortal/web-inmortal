@@ -46,6 +46,15 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build Projects App
+        working-directory: ./Evidencia/proyectos-react
+        env:
+          # Pasar el nombre del repositorio para configurar el base path
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          npm ci
+          npm run build
+
       - name: Copy Certificates to Portfolio Dist
         run: |
           # Copiar los archivos de certificados al dist del portfolio
