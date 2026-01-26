@@ -52,6 +52,12 @@ jobs:
           mkdir -p portfolio-react/dist/certificados
           cp -r Evidencia/certificates-app/dist/* portfolio-react/dist/certificados/
 
+      - name: Copy Projects to Portfolio Dist
+        run: |
+          # Copiar los archivos de proyectos al dist del portfolio
+          mkdir -p portfolio-react/dist/proyectos
+          cp -r Evidencia/proyectos-react/dist/* portfolio-react/dist/proyectos/
+
       - name: Create .nojekyll file
         working-directory: ./portfolio-react/dist
         run: touch .nojekyll

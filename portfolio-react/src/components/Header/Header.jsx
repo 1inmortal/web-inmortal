@@ -130,6 +130,42 @@ const Header = () => {
     return `https://${GITHUB_USER}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}/index.html`;
   };
 
+  // Función para obtener la URL de Proyectos según el entorno
+  const getProjectsUrl = () => {
+    // Si está en desarrollo local (localhost)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:5175'; // Puerto diferente para proyectos
+    }
+    
+    // Para producción en GitHub Pages
+    const GITHUB_USER = '1inmortal';
+    const REPO_NAME = 'web-inmortal';
+    
+    // Ruta donde está la app de proyectos
+    // Los proyectos se copian a portfolio-react/dist/proyectos/ durante el build
+    const PROJECTS_PATH = 'proyectos';
+    
+    const hostname = window.location.hostname;
+    
+    // Si está en GitHub Pages, construir la URL
+    if (hostname.includes('github.io')) {
+      const parts = hostname.split('.');
+      if (parts.length >= 2) {
+        const githubUser = parts[0];
+        // Obtener el repositorio desde el pathname o usar el configurado
+        const pathname = window.location.pathname;
+        const pathSegments = pathname.split('/').filter(p => p);
+        const currentRepo = pathSegments[0] || REPO_NAME;
+        
+        // Construir URL: usuario.github.io/repositorio/proyectos/index.html
+        return `https://${githubUser}.github.io/${currentRepo}/${PROJECTS_PATH}/index.html`;
+      }
+    }
+    
+    // Fallback: URL por defecto
+    return `https://${GITHUB_USER}.github.io/${REPO_NAME}/${PROJECTS_PATH}/index.html`;
+  };
+
   // Enlaces de navegación
   // Para enlaces externos, usa la URL completa (ej: 'https://otra-app.com')
   // Para enlaces internos, usa anclas (ej: '#inicio')
@@ -139,7 +175,7 @@ const Header = () => {
     { name: 'Experiencia', href: '#experiencia' }, // Timeline dentro de About
     { name: 'Stack', href: '#stack' }, // Stack técnico dentro de About
     { name: 'Servicios', href: '#servicios' },
-    { name: 'Proyectos', href: '#proyectos' },
+    { name: 'Proyectos', href: getProjectsUrl() }, // App de proyectos-react
     { name: 'Certificados', href: getCertificatesUrl() },
     { name: 'Contacto', href: '#contacto' },
   ];
