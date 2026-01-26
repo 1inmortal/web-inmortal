@@ -83,7 +83,7 @@ const About = () => {
               memorables.
             </p>
 
-            <div className="mb-8">
+            <div id="stack" className="mb-8">
               <h4 className="text-white font-bold mb-4 flex items-center gap-2">
                 <Cpu size={20} className="text-cyan-400" /> Stack Técnico
               </h4>
@@ -100,8 +100,8 @@ const About = () => {
             </div>
           </div>
 
-          {/* Timeline */}
-          <div className="space-y-8 relative pl-8 border-l border-slate-800 scroll-reveal">
+          {/* Timeline - Sección Experiencia */}
+          <div id="experiencia" className="space-y-8 relative pl-8 border-l border-slate-800 scroll-reveal">
             <div className="text-cyan-400 font-mono text-sm mb-4">
               // SYSTEM_LOGS
             </div>

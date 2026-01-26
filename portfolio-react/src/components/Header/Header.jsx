@@ -54,6 +54,8 @@ const Header = () => {
   const navLinks = [
     { name: 'Inicio', href: '#inicio' },
     { name: 'Acerca', href: '#acerca' },
+    { name: 'Experiencia', href: '#experiencia' }, // Timeline dentro de About
+    { name: 'Stack', href: '#stack' }, // Stack técnico dentro de About
     { name: 'Servicios', href: '#servicios' },
     { name: 'Proyectos', href: '#proyectos' },
     { name: 'Certificados', href: getCertificatesUrl() },
