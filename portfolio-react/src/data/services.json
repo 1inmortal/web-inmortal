@@ -1,54 +1,58 @@
 [
   {
     "id": 1,
-    "title": "Desarrollo Web3",
-    "icon": "blockchain",
-    "description": "Construcción de dApps, smart contracts y ecosistemas descentralizados.",
+    "title": "Infraestructura y Soporte TI",
+    "icon": "globe",
+    "description": "Gestión integral de infraestructura tecnológica y soporte técnico especializado.",
     "benefits": [
-      "Arquitectura completa de contratos (ERC-20 / ERC-721 / ERC-1155)",
-      "Dashboards de administración y paneles analíticos en tiempo real",
-      "Integración con redes principales y testnets (Ethereum, Polygon, etc.)",
-      "Automatización de despliegues con pipelines CI/CD para Web3"
+      "Cableado estructurado Ethernet y configuración de redes",
+      "Instalación, formateo y optimización de sistemas Windows",
+      "Mantenimiento preventivo y correctivo de equipos",
+      "Implementación y gestión de máquinas virtuales",
+      "Soporte técnico TI y administración de Microsoft Office 365"
     ],
-    "technologies": ["Solidity", "Hardhat", "Ethers.js", "DeFi / dApps"]
+    "technologies": ["Redes", "Windows", "Virtualización", "Office 365"]
   },
   {
     "id": 2,
-    "title": "IA Generativa",
+    "title": "Desarrollo y Programación",
     "icon": "brain",
-    "description": "Integración de modelos de IA para automatización y generación de contenido.",
+    "description": "Desarrollo de software con enfoque en análisis de datos, visión computacional y aplicaciones web modernas.",
     "benefits": [
-      "Diseño e integración de APIs de IA (OpenAI, Stable Diffusion, etc.)",
-      "Orquestación de agentes autónomos para flujos de negocio complejos",
-      "Sistemas de recomendación y personalización de contenido",
-      "Paneles para monitorizar calidad, coste y latencia de los modelos"
+      "Análisis de datos y modelos de predicción con Python",
+      "Visión computacional y procesamiento visual de objetos",
+      "Desarrollo frontend con React y Angular",
+      "Aplicaciones web responsivas con HTML, CSS y JavaScript",
+      "Captura y procesamiento de datos en tiempo real"
     ],
-    "technologies": ["Python", "FastAPI", "LangChain", "LLMs"]
+    "technologies": ["Python", "React", "Angular", "JavaScript"]
   },
   {
     "id": 3,
-    "title": "Experiencias 3D",
+    "title": "Backend y Servidores",
     "icon": "cube",
-    "description": "Desarrollo de interfaces inmersivas con Three.js y WebGL.",
+    "description": "Arquitectura de servidores y gestión de datos para aplicaciones web escalables.",
     "benefits": [
-      "Landing pages 3D con micro-interacciones y narrativa visual",
-      "Viewers de producto en tiempo real (360º, zoom, materiales PBR)",
-      "Sistemas de partículas, cámaras guiadas y transiciones suaves",
-      "Optimización de FPS y carga progresiva para dispositivos móviles"
+      "Desarrollo de servidores locales con Node.js",
+      "Diseño e implementación de bases de datos SQL",
+      "Gestión de datos para sitios web y aplicaciones",
+      "APIs RESTful y arquitectura de microservicios",
+      "Optimización de rendimiento y escalabilidad"
     ],
-    "technologies": ["Three.js", "WebGL", "R3F", "GSAP"]
+    "technologies": ["Node.js", "SQL", "APIs", "Backend"]
   },
   {
     "id": 4,
     "title": "Desarrollo Web",
     "icon": "globe",
-    "description": "Sitios web modernos, rápidos y SEO-friendly usando Next.js y React.",
+    "description": "Construcción de aplicaciones web modernas, escalables y de alto rendimiento.",
     "benefits": [
       "Arquitectura escalable y mantenible",
       "Optimización de rendimiento y Core Web Vitals",
       "SEO avanzado y mejoras de accesibilidad",
-      "Integración con servicios de terceros y APIs"
+      "Integración con servicios de terceros y APIs",
+      "Desarrollo full-stack con tecnologías modernas"
     ],
-    "technologies": ["React", "Next.js", "TypeScript", "Tailwind CSS"]
+    "technologies": ["React", "Node.js", "HTML/CSS", "JavaScript"]
   }
 ]

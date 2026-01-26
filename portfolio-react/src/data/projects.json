@@ -12,10 +12,10 @@
   {
     "id": 2,
     "title": "Neural Studio",
-    "category": "AI / SaaS",
+    "category": "AI / Data Science",
     "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
-    "description": "Generador de assets para videojuegos utilizando Stable Diffusion API.",
-    "technologies": ["Python", "FastAPI", "Next.js"],
+    "description": "Sistema de análisis de datos y visión computacional con modelos de predicción desarrollado en Python. Procesamiento visual de objetos y captura de datos en tiempo real.",
+    "technologies": ["Python", "Data Analysis", "Computer Vision"],
     "status": "BETA",
     "link": "#"
   },
@@ -42,10 +42,10 @@
   {
     "id": 5,
     "title": "Inmortal OS Dashboard",
-    "category": "React / Dashboard",
+    "category": "React / Backend",
     "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-    "description": "Panel de administración con visualización de datos en tiempo real.",
-    "technologies": ["React", "TypeScript", "Chart.js"],
+    "description": "Panel de administración con servidor Node.js y gestión de datos SQL. Visualización de métricas en tiempo real y arquitectura backend escalable.",
+    "technologies": ["React", "Node.js", "SQL"],
     "status": "LIVE",
     "link": "#"
   },

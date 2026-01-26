@@ -31,18 +31,17 @@ const About = () => {
   }, []);
 
   const techStack = [
-    'JavaScript (ES6+)',
-    'TypeScript',
-    'React',
-    'Next.js',
-    'Node.js',
-    'TailwindCSS',
-    'PostgreSQL',
-    'Docker',
-    'Git',
-    'Solidity',
-    'Three.js',
     'Python',
+    'React',
+    'Angular',
+    'Node.js',
+    'JavaScript',
+    'HTML/CSS',
+    'SQL',
+    'Redes',
+    'Windows',
+    'Virtualización',
+    'Office 365',
   ];
 
   return (
@@ -65,22 +64,25 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-16">
           <div className="scroll-reveal">
             <h3 className="text-2xl font-bold text-white mb-6">
-              Más allá del código
+              Perfil Profesional
             </h3>
             <p className="text-slate-400 mb-6 leading-relaxed">
-              Más que escribir <strong className="text-cyan-400">código</strong>
-              , construyo <strong className="text-cyan-400">ecosistemas</strong>
-              . Mi pasión reside en la intersección entre el{' '}
-              <strong className="text-cyan-400">diseño minimalista</strong> y la{' '}
-              <strong className="text-cyan-400">ingeniería robusta</strong>.
+              Como <strong className="text-cyan-400">Ingeniero y Técnico en Tecnologías de la Información</strong>, 
+              mi enfoque profesional integra la capacidad de análisis, diseño e implementación de soluciones tecnológicas 
+              complejas. Mi experiencia abarca desde la{' '}
+              <strong className="text-cyan-400">infraestructura de red</strong> y{' '}
+              <strong className="text-cyan-400">soporte técnico</strong> hasta el{' '}
+              <strong className="text-cyan-400">desarrollo de software</strong> y{' '}
+              <strong className="text-cyan-400">gestión de datos</strong>.
             </p>
             <p className="text-slate-400 mb-8 leading-relaxed">
-              Actualmente enfocado en desarrollar{' '}
-              <strong className="text-cyan-400">
-                experiencias 3D interactivas
-              </strong>{' '}
-              con Three.js, Python y tecnologías modernas para crear productos
-              memorables.
+              Mi metodología se fundamenta en el <strong className="text-cyan-400">pensamiento analítico</strong>, 
+              la <strong className="text-cyan-400">visión estructurada</strong> y la{' '}
+              <strong className="text-cyan-400">mejora continua</strong>. Trabajo con un equilibrio entre{' '}
+              <strong className="text-cyan-400">software</strong>,{' '}
+              <strong className="text-cyan-400">hardware</strong> e{' '}
+              <strong className="text-cyan-400">infraestructura</strong>, permitiéndome abordar proyectos desde 
+              múltiples perspectivas técnicas y garantizar soluciones integrales y escalables.
             </p>
 
             <div id="stack" className="mb-8">

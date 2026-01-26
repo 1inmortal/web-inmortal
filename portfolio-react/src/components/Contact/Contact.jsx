@@ -38,8 +38,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">Hablemos</h3>
               <p className="text-slate-400 text-sm mb-8">
-                ¿Tienes un proyecto visionario? Estoy listo para construir el
-                futuro contigo.
+                ¿Necesitas soluciones tecnológicas integrales? Estoy disponible para proyectos de 
+                infraestructura TI, desarrollo de software y sistemas de gestión de datos.
               </p>
 
               <div className="space-y-4">

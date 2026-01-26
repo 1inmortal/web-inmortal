@@ -34,17 +34,16 @@ const Hero = () => {
             Open to Work 2024
           </div>
           <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-            Ingeniero <br />
+            Ingeniero y Técnico <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-              Full-Stack
+              en Tecnologías de la Información
             </span>
           </h1>
           <p className="text-lg text-slate-400 max-w-lg leading-relaxed">
-            Arquitecto de productos digitales. Construyo{' '}
-            <strong className="text-cyan-400">Apps Web3</strong>,{' '}
-            <strong className="text-cyan-400">herramientas con IA</strong> y{' '}
-            <strong className="text-cyan-400">experiencias 3D</strong> para
-            startups y estudios creativos que buscan diferenciarse.
+            Especializado en desarrollo de software, infraestructura TI y soluciones tecnológicas integrales. 
+            Combino conocimientos de <strong className="text-cyan-400">ingeniería</strong> y{' '}
+            <strong className="text-cyan-400">técnica</strong> para diseñar e implementar sistemas robustos 
+            que optimizan procesos y potencian la transformación digital.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -108,13 +107,13 @@ const Hero = () => {
                 name: <span className="text-green-400">'Inmortal'</span>,
               </div>
               <div className="pl-4 text-slate-300">
-                role: <span className="text-green-400">'Full Stack Engineer'</span>,
+                role: <span className="text-green-400">'Ingeniero y Técnico TI'</span>,
               </div>
               <div className="pl-4 text-slate-300">
                 skills: [
+                <span className="text-green-400">'Python'</span>,{' '}
                 <span className="text-green-400">'React'</span>,{' '}
-                <span className="text-green-400">'Node'</span>,{' '}
-                <span className="text-green-400">'Web3'</span>],
+                <span className="text-green-400">'Node.js'</span>],
               </div>
               <div className="pl-4 text-slate-300">
                 hardWorker: <span className="text-blue-400">true</span>
