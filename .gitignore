@@ -41,6 +41,10 @@ yarn-error.log*
 !Evidencia/certificates-app/dist/
 !Evidencia/certificates-app/dist/**
 
+# INCLUIR archivos compilados de proyectos
+!Evidencia/proyectos-react/dist/
+!Evidencia/proyectos-react/dist/**
+
 !.github/
 !.github/**
 
