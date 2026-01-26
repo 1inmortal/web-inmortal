@@ -792,11 +792,11 @@ const PortfolioApp = () => {
             alignItems: 'center'
           }}>
             <NavLink href={getMainPageUrl('#inicio')}>{t.nav.inicio}</NavLink>
-            <NavLink href="#experiencia">{t.nav.experiencia}</NavLink>
-            <NavLink href="#stack">{t.nav.stack}</NavLink>
-            <NavLink href="#proyectos">{t.nav.proyectos}</NavLink>
-            <NavLink href="#servicios">{t.nav.servicios}</NavLink>
-            <NavLink href="#contacto">{t.nav.contacto}</NavLink>
+            <NavLink href="#timeline">{t.nav.experiencia}</NavLink>
+            <NavLink href="#skills">{t.nav.stack}</NavLink>
+            <NavLink href="#explorer">{t.nav.proyectos}</NavLink>
+            <NavLink href="#explorer">{t.nav.servicios}</NavLink>
+            <NavLink href="#explorer">{t.nav.contacto}</NavLink>
             <LanguageToggle currentLang={language} onLanguageChange={handleLanguageChange} />
           </nav>
           
@@ -853,11 +853,11 @@ const PortfolioApp = () => {
             gap: '20px'
           }}>
             <NavLink href={getMainPageUrl('#inicio')} onClick={() => setIsMobileMenuOpen(false)}>{t.nav.inicio}</NavLink>
-            <NavLink href="#experiencia" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.experiencia}</NavLink>
-            <NavLink href="#stack" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.stack}</NavLink>
-            <NavLink href="#proyectos" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.proyectos}</NavLink>
-            <NavLink href="#servicios" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.servicios}</NavLink>
-            <NavLink href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.contacto}</NavLink>
+            <NavLink href="#timeline" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.experiencia}</NavLink>
+            <NavLink href="#skills" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.stack}</NavLink>
+            <NavLink href="#explorer" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.proyectos}</NavLink>
+            <NavLink href="#explorer" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.servicios}</NavLink>
+            <NavLink href="#explorer" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.contacto}</NavLink>
             <div style={{ paddingTop: '10px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
               <LanguageToggle currentLang={language} onLanguageChange={handleLanguageChange} />
             </div>
