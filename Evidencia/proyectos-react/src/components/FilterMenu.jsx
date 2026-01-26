@@ -22,18 +22,6 @@ const FilterMenu = ({
     { id: 'gsap', label: 'GSAP' },
   ];
 
-  // Función para obtener la URL de Las Flores según el entorno
-  const getLasFloresUrl = () => {
-    // Si está en desarrollo local (localhost)
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return 'http://localhost:5176'; // Puerto diferente para cenaduria
-    }
-    
-    // Para producción en GitHub Pages - siempre usar URL absoluta fija
-    // La app de cenaduria está en: https://1inmortal.github.io/web-inmortal/cenaduria/index.html
-    return 'https://1inmortal.github.io/web-inmortal/cenaduria/index.html';
-  };
-
   useEffect(() => {
     // Mover indicador visual al filtro activo con animación GSAP
     if (indicatorRef.current && menuRef.current) {
@@ -94,18 +82,6 @@ const FilterMenu = ({
           </span>
         </button>
       ))}
-      <a
-        href={getLasFloresUrl()}
-        className="filter-button external-link"
-        onClick={(e) => {
-          e.preventDefault();
-          window.location.href = getLasFloresUrl();
-        }}
-        aria-label="Las Flores Restaurante"
-        title="Las Flores Restaurante"
-      >
-        LAS FLORES RESTAURANTE
-      </a>
       <div className="view-controls">
         <button
           className={`view-toggle ${viewMode === 'list' ? 'active' : ''}`}
