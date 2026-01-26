@@ -33,7 +33,7 @@ const Hero = () => {
           <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-mono mb-4">
             Open to Work 2024
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
             Ingeniero y Técnico <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               en Tecnologías de la Información
