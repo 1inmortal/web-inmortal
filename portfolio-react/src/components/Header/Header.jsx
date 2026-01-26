@@ -322,7 +322,9 @@ const Header = () => {
             <Twitter size={20} />
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/josé-armando-espinosa-25b615337"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               color: 'rgba(255, 255, 255, 0.4)',
               transition: 'color 0.3s',

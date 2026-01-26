@@ -46,15 +46,22 @@ const Contact = () => {
                 <div className="flex items-center gap-3 text-slate-300">
                   <Mail className="text-cyan-400" size={20} />
                   <a
-                    href="mailto:contacto@inmortal.dev"
+                    href="mailto:jarmando2965@gmail.com"
                     className="hover:text-cyan-400 transition-colors"
                   >
-                    contacto@inmortal.dev
+                    jarmando2965@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3 text-slate-300">
                   <Linkedin className="text-cyan-400" size={20} />
-                  <span>in.linkedin.com/inmortal</span>
+                  <a
+                    href="https://www.linkedin.com/in/josé-armando-espinosa-25b615337"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-cyan-400 transition-colors"
+                  >
+                    LinkedIn
+                  </a>
                 </div>
                 <div className="flex items-center gap-3 text-slate-300">
                   <Github className="text-cyan-400" size={20} />
@@ -90,7 +97,9 @@ const Contact = () => {
                   <Twitter size={18} />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/josé-armando-espinosa-25b615337"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all"
                 >
                   <Linkedin size={18} />

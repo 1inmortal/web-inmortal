@@ -66,13 +66,13 @@ const Footer = () => {
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      href: '#',
+      href: 'https://www.linkedin.com/in/josé-armando-espinosa-25b615337',
       color: 'hover:text-blue-500 hover:bg-blue-500/10',
     },
     {
       name: 'Email',
       icon: Mail,
-      href: 'mailto:contacto@inmortal.dev',
+      href: 'mailto:jarmando2965@gmail.com',
       color: 'hover:text-cyan-400 hover:bg-cyan-500/10',
     },
   ];
@@ -152,10 +152,10 @@ const Footer = () => {
               <li className="flex items-start gap-3 text-slate-400 text-sm">
                 <Mail size={16} className="text-cyan-400 mt-1 flex-shrink-0" />
                 <a
-                  href="mailto:contacto@inmortal.dev"
+                  href="mailto:jarmando2965@gmail.com"
                   className="hover:text-cyan-400 transition-colors"
                 >
-                  contacto@inmortal.dev
+                  jarmando2965@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-slate-400 text-sm">
