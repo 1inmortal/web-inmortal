@@ -8,7 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# dist se incluye para GitHub Pages (los archivos compilados deben estar en el repo)
+# dist
 dist-ssr
 *.local
 
