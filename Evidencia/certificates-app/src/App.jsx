@@ -548,7 +548,14 @@ const CertificateModal = ({ cert, isOpen, onClose, translations: t, language }) 
              >
                {t.modal.verifyCredential}
              </Button>
-             <Button variant="secondary" className="w-full sm:w-auto" icon={Share2}>{t.modal.shareLinkedIn}</Button>
+             <Button 
+               variant="secondary" 
+               className="w-full sm:w-auto" 
+               icon={Share2}
+               onClick={() => window.open('https://www.linkedin.com/in/josé-armando-espinosa-25b615337', '_blank', 'noopener,noreferrer')}
+             >
+               {t.modal.shareLinkedIn}
+             </Button>
              <Button variant="ghost" className="w-full sm:w-auto" icon={Download}>{t.modal.downloadPDF}</Button>
           </div>
         </div>
@@ -875,7 +882,13 @@ const PortfolioApp = () => {
              </p>
              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                <Button icon={ChevronRight} onClick={() => document.getElementById('explorer').scrollIntoView({behavior: 'smooth'})}>{t.hero.explore}</Button>
-               <Button variant="ghost" icon={ExternalLink}>{t.hero.linkedin}</Button>
+               <Button 
+                 variant="ghost" 
+                 icon={ExternalLink}
+                 onClick={() => window.open('https://www.linkedin.com/in/josé-armando-espinosa-25b615337', '_blank', 'noopener,noreferrer')}
+               >
+                 {t.hero.linkedin}
+               </Button>
              </div>
           </div>
         </section>
@@ -1012,7 +1025,11 @@ const PortfolioApp = () => {
                  {t.footer.subtitle}
               </p>
               <div className="flex justify-center gap-4 mb-16">
-                 <Button>{t.footer.contact}</Button>
+                 <Button 
+                   onClick={() => window.location.href = 'mailto:jarmando2965@gmail.com'}
+                 >
+                   {t.footer.contact}
+                 </Button>
                  <Button variant="secondary" icon={Share2}>{t.footer.share}</Button>
                  <Button 
                    variant="primary" 
