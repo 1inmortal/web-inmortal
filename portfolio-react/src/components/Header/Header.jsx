@@ -18,20 +18,22 @@ const Header = () => {
       return 'http://localhost:5174';
     }
     
-    // Para producción en GitHub Pages - mismo repositorio
-    // ⚠️ CONFIGURACIÓN: Actualiza estas constantes según tu configuración
-    const GITHUB_USER = '1inmortal'; // ⚠️ Tu usuario de GitHub
-    const REPO_NAME = 'web-inmortal'; // ⚠️ Nombre del repositorio en GitHub
-    const CERTIFICATES_PATH = 'Evidencia/certificates-app/dist'; // ⚠️ Ruta donde está la app de certificados
+    // Para producción en GitHub Pages
+    // ⚠️ CONFIGURACIÓN: Actualiza la ruta según donde esté desplegada la app de certificados
+    const GITHUB_USER = '1inmortal';
+    const REPO_NAME = 'web-inmortal';
+    
+    // Ruta donde está la app de certificados en el repositorio
+    // Si los certificados están en otra ubicación, actualiza esta constante
+    const CERTIFICATES_PATH = 'Evidencia/certificates-app/dist';
     
     const hostname = window.location.hostname;
     
-    // Si está en GitHub Pages, detectar usuario automáticamente
+    // Si está en GitHub Pages, construir la URL
     if (hostname.includes('github.io')) {
       const parts = hostname.split('.');
       if (parts.length >= 2) {
         const githubUser = parts[0];
-        // Construir URL directamente con el repositorio configurado
         return `https://${githubUser}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}`;
       }
     }
