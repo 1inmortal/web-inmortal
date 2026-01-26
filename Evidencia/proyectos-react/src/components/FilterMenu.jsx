@@ -22,6 +22,41 @@ const FilterMenu = ({
     { id: 'gsap', label: 'GSAP' },
   ];
 
+  // Función para obtener la URL de Las Flores según el entorno
+  const getLasFloresUrl = () => {
+    // Si está en desarrollo local (localhost)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:5176'; // Puerto diferente para cenaduria
+    }
+    
+    // Para producción en GitHub Pages
+    const GITHUB_USER = '1inmortal';
+    const REPO_NAME = 'web-inmortal';
+    
+    // Ruta donde está la app de cenaduria
+    const CENADURIA_PATH = 'cenaduria';
+    
+    const hostname = window.location.hostname;
+    
+    // Si está en GitHub Pages, construir la URL
+    if (hostname.includes('github.io')) {
+      const parts = hostname.split('.');
+      if (parts.length >= 2) {
+        const githubUser = parts[0];
+        // Obtener el repositorio desde el pathname o usar el configurado
+        const pathname = window.location.pathname;
+        const pathSegments = pathname.split('/').filter(p => p);
+        const currentRepo = pathSegments[0] || REPO_NAME;
+        
+        // Construir URL: usuario.github.io/repositorio/cenaduria/index.html
+        return `https://${githubUser}.github.io/${currentRepo}/${CENADURIA_PATH}/index.html`;
+      }
+    }
+    
+    // Fallback: URL por defecto
+    return `https://${GITHUB_USER}.github.io/${REPO_NAME}/${CENADURIA_PATH}/index.html`;
+  };
+
   useEffect(() => {
     // Mover indicador visual al filtro activo con animación GSAP
     if (indicatorRef.current && menuRef.current) {
@@ -82,6 +117,18 @@ const FilterMenu = ({
           </span>
         </button>
       ))}
+      <a
+        href={getLasFloresUrl()}
+        className="filter-button external-link"
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = getLasFloresUrl();
+        }}
+        aria-label="Las Flores Restaurante"
+        title="Las Flores Restaurante"
+      >
+        LAS FLORES RESTAURANTE
+      </a>
       <div className="view-controls">
         <button
           className={`view-toggle ${viewMode === 'list' ? 'active' : ''}`}
