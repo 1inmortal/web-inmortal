@@ -19,41 +19,25 @@ const Header = () => {
     }
     
     // Para producción en GitHub Pages - mismo repositorio
-    // ⚠️ CONFIGURACIÓN: Actualiza la ruta donde esté desplegada la app de certificados
-    // Ejemplos:
-    // - Si está en 'Evidencia/certificates-app/dist': 'Evidencia/certificates-app/dist'
-    // - Si está en 'certificates-app/dist': 'certificates-app/dist'
-    // - Si está en la raíz del repo: ''
-    const CERTIFICATES_PATH = 'Evidencia/certificates-app/dist'; // ⚠️ CAMBIA ESTO con la ruta real
+    // ⚠️ CONFIGURACIÓN: Actualiza estas constantes según tu configuración
+    const GITHUB_USER = '1inmortal'; // ⚠️ Tu usuario de GitHub
+    const REPO_NAME = 'web-inmortal'; // ⚠️ Nombre del repositorio en GitHub
+    const CERTIFICATES_PATH = 'Evidencia/certificates-app/dist'; // ⚠️ Ruta donde está la app de certificados
     
     const hostname = window.location.hostname;
-    const pathname = window.location.pathname;
     
-    // Si está en GitHub Pages
+    // Si está en GitHub Pages, detectar usuario automáticamente
     if (hostname.includes('github.io')) {
       const parts = hostname.split('.');
       if (parts.length >= 2) {
         const githubUser = parts[0];
-        
-        // Obtener el repositorio actual desde la URL
-        // Ejemplo: "1inmortal.github.io/web-inmortal/" -> "web-inmortal"
-        const pathSegments = pathname.split('/').filter(p => p);
-        const currentRepo = pathSegments[0] || '';
-        
-        // Construir la URL base del repositorio
-        const baseUrl = currentRepo 
-          ? `https://${githubUser}.github.io/${currentRepo}` 
-          : `https://${githubUser}.github.io`;
-        
-        // Como están en el mismo repositorio, usar ruta relativa desde la base
-        return CERTIFICATES_PATH 
-          ? `${baseUrl}/${CERTIFICATES_PATH}` 
-          : baseUrl;
+        // Construir URL directamente con el repositorio configurado
+        return `https://${githubUser}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}`;
       }
     }
     
     // Fallback: URL por defecto
-    return `https://1inmortal.github.io/web-inmortal/${CERTIFICATES_PATH}`;
+    return `https://${GITHUB_USER}.github.io/${REPO_NAME}/${CERTIFICATES_PATH}`;
   };
 
   // Enlaces de navegación
