@@ -45,6 +45,10 @@ yarn-error.log*
 !Evidencia/proyectos-react/dist/
 !Evidencia/proyectos-react/dist/**
 
+# INCLUIR archivos compilados de cenaduria
+!Evidencia/webs/cenaduria/react-app/dist/
+!Evidencia/webs/cenaduria/react-app/dist/**
+
 !.github/
 !.github/**
 
