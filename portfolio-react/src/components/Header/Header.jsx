@@ -1,22 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Terminal, Github, Twitter, Linkedin } from 'lucide-react';
+import { Menu, X, Terminal, Github, Twitter, Linkedin, ExternalLink } from 'lucide-react';
 import './Header.module.css';
 
 /**
  * Header Component
  * Navegación principal con menú responsive y enlaces de anclaje
+ * Soporta enlaces internos (anclas) y externos (otras aplicaciones React)
  */
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Función para obtener la URL de Certificados según el entorno
+  const getCertificatesUrl = () => {
+    // Si está en desarrollo local (localhost)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:5174';
+    }
+    
+    // Para producción en GitHub Pages - detectar automáticamente el usuario
+    const hostname = window.location.hostname;
+    
+    // Si está en GitHub Pages (ej: usuario.github.io o usuario.github.io/repo)
+    if (hostname.includes('github.io')) {
+      // Extraer el usuario de GitHub desde el hostname
+      // Ejemplo: "usuario.github.io" -> "usuario"
+      const parts = hostname.split('.');
+      if (parts.length >= 2) {
+        const githubUser = parts[0];
+        // ⚠️ ACTUALIZA 'certificates-app' con el nombre real del repositorio donde esté desplegada
+        // Si está en el mismo repositorio pero en otra carpeta, ajusta la ruta
+        return `https://${githubUser}.github.io/certificates-app`;
+      }
+    }
+    
+    // Fallback: URL por defecto (actualiza con tu URL real)
+    // ⚠️ ACTUALIZA esta URL con la dirección real donde esté desplegada tu app de certificados
+    return 'https://tu-usuario.github.io/certificates-app';
+  };
+
+  // Enlaces de navegación
+  // Para enlaces externos, usa la URL completa (ej: 'https://otra-app.com')
+  // Para enlaces internos, usa anclas (ej: '#inicio')
   const navLinks = [
     { name: 'Inicio', href: '#inicio' },
     { name: 'Acerca', href: '#acerca' },
     { name: 'Servicios', href: '#servicios' },
     { name: 'Proyectos', href: '#proyectos' },
+    { name: 'Certificados', href: getCertificatesUrl() },
     { name: 'Contacto', href: '#contacto' },
   ];
+
+  // Función para detectar si un enlace es externo
+  const isExternalLink = (href) => {
+    return href.startsWith('http://') || href.startsWith('https://');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,15 +94,36 @@ const Header = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => scrollTo(link.href)}
-              className="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors uppercase tracking-wide"
-            >
-              {link.name}
-            </button>
-          ))}
+          {navLinks.map((link) => {
+            const isExternal = isExternalLink(link.href);
+            
+            if (isExternal) {
+              // Enlace externo - usar <a> tag
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors uppercase tracking-wide flex items-center gap-1"
+                >
+                  {link.name}
+                  <ExternalLink size={14} className="opacity-70" />
+                </a>
+              );
+            }
+            
+            // Enlace interno - usar <button> con scroll
+            return (
+              <button
+                key={link.name}
+                onClick={() => scrollTo(link.href)}
+                className="text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors uppercase tracking-wide"
+              >
+                {link.name}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Social / CTA */}
@@ -103,15 +162,37 @@ const Header = () => {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-white/10 py-4 px-6 flex flex-col gap-4 shadow-xl">
-          {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => scrollTo(link.href)}
-              className="text-left text-slate-300 hover:text-cyan-400 py-2 transition-colors"
-            >
-              {link.name}
-            </button>
-          ))}
+          {navLinks.map((link) => {
+            const isExternal = isExternalLink(link.href);
+            
+            if (isExternal) {
+              // Enlace externo - usar <a> tag
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-left text-slate-300 hover:text-cyan-400 py-2 transition-colors flex items-center gap-2"
+                >
+                  {link.name}
+                  <ExternalLink size={14} className="opacity-70" />
+                </a>
+              );
+            }
+            
+            // Enlace interno - usar <button> con scroll
+            return (
+              <button
+                key={link.name}
+                onClick={() => scrollTo(link.href)}
+                className="text-left text-slate-300 hover:text-cyan-400 py-2 transition-colors"
+              >
+                {link.name}
+              </button>
+            );
+          })}
         </div>
       )}
     </header>
