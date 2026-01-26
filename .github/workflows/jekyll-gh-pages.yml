@@ -55,6 +55,15 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build Cenaduria App
+        working-directory: ./Evidencia/webs/cenaduria/react-app
+        env:
+          # Pasar el nombre del repositorio para configurar el base path
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          npm ci
+          npm run build
+
       - name: Copy Certificates to Portfolio Dist
         run: |
           # Copiar los archivos de certificados al dist del portfolio
@@ -66,6 +75,12 @@ jobs:
           # Copiar los archivos de proyectos al dist del portfolio
           mkdir -p portfolio-react/dist/proyectos
           cp -r Evidencia/proyectos-react/dist/* portfolio-react/dist/proyectos/
+
+      - name: Copy Cenaduria to Portfolio Dist
+        run: |
+          # Copiar los archivos de cenaduria al dist del portfolio
+          mkdir -p portfolio-react/dist/cenaduria
+          cp -r Evidencia/webs/cenaduria/react-app/dist/* portfolio-react/dist/cenaduria/
 
       - name: Create .nojekyll file
         working-directory: ./portfolio-react/dist
