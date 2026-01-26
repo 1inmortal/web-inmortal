@@ -684,6 +684,38 @@ const PortfolioApp = () => {
 
   const t = translations[language];
 
+  // Función para obtener la URL de la página principal según el entorno
+  const getMainPageUrl = (anchor = '') => {
+    // Si está en desarrollo local (localhost)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return anchor ? `http://localhost:5173${anchor}` : 'http://localhost:5173';
+    }
+    
+    // Para producción en GitHub Pages
+    const GITHUB_USER = '1inmortal';
+    const REPO_NAME = 'web-inmortal';
+    
+    const hostname = window.location.hostname;
+    
+    // Si está en GitHub Pages, construir la URL
+    if (hostname.includes('github.io')) {
+      const parts = hostname.split('.');
+      if (parts.length >= 2) {
+        const githubUser = parts[0];
+        // Obtener el repositorio desde el pathname o usar el configurado
+        const pathname = window.location.pathname;
+        const pathSegments = pathname.split('/').filter(p => p);
+        const currentRepo = pathSegments[0] || REPO_NAME;
+        
+        // Construir URL: usuario.github.io/repositorio#inicio (sin barra antes del #)
+        return `https://${githubUser}.github.io/${currentRepo}${anchor}`;
+      }
+    }
+    
+    // Fallback: URL por defecto
+    return `https://${GITHUB_USER}.github.io/${REPO_NAME}${anchor}`;
+  };
+
   // Función para cambiar idioma
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
@@ -759,7 +791,7 @@ const PortfolioApp = () => {
             gap: '30px',
             alignItems: 'center'
           }}>
-            <NavLink href="../../../index.html#inicio">{t.nav.inicio}</NavLink>
+            <NavLink href={getMainPageUrl('#inicio')}>{t.nav.inicio}</NavLink>
             <NavLink href="#experiencia">{t.nav.experiencia}</NavLink>
             <NavLink href="#stack">{t.nav.stack}</NavLink>
             <NavLink href="#proyectos">{t.nav.proyectos}</NavLink>
@@ -820,7 +852,7 @@ const PortfolioApp = () => {
             flexDirection: 'column',
             gap: '20px'
           }}>
-            <NavLink href="../../../index.html#inicio" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.inicio}</NavLink>
+            <NavLink href={getMainPageUrl('#inicio')} onClick={() => setIsMobileMenuOpen(false)}>{t.nav.inicio}</NavLink>
             <NavLink href="#experiencia" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.experiencia}</NavLink>
             <NavLink href="#stack" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.stack}</NavLink>
             <NavLink href="#proyectos" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.proyectos}</NavLink>
