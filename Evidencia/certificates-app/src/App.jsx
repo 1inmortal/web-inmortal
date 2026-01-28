@@ -18,6 +18,7 @@ import {
   Database,
   Cloud
 } from 'lucide-react';
+import specializationEmblem from './png/CERTIFICACIONES DE ESPECIALIZACIÓN.png';
 
 // --- DATA MODEL & MOCK DATA ---
 
@@ -44,6 +45,31 @@ const CERTIFICATES_DATA = [
     description: {
       en: 'Introduction to computers covering basic concepts of hardware, software, and computing systems. Provides foundational knowledge for understanding how computers work and their role in modern technology.',
       es: 'Introducción a las computadoras que cubre conceptos básicos de hardware, software y sistemas informáticos. Proporciona conocimientos fundamentales para comprender cómo funcionan las computadoras y su papel en la tecnología moderna.'
+    }
+  },
+  {
+    id: 'c1b',
+    title: 'Microsoft IT Support Specialist',
+    provider: 'MICROSOFT',
+    issueDate: '2025-02-18',
+    credentialId: 'COURSERA-MS-ITSS',
+    verificationUrl: 'https://coursera.org/share/62fd36b2229479b089c79058809f2e5d',
+    skills: ['IT Support', 'Troubleshooting', 'Windows', 'Networking', 'Hardware', 'Cybersecurity Basics'],
+    level: 'Professional',
+    area: 'IT Support',
+    featured: true,
+    isSpecialization: true,
+    certificationType: 'Professional Certificate',
+    statusLabel: { es: 'Programa Completo', en: 'Complete Program' },
+    modules: [
+      { es: 'Fundamentos de soporte técnico', en: 'Technical support fundamentals' },
+      { es: 'Sistemas operativos y administración', en: 'Operating systems & administration' },
+      { es: 'Redes y conectividad', en: 'Networking & connectivity' },
+      { es: 'Seguridad y buenas prácticas', en: 'Security & best practices' }
+    ],
+    description: {
+      en: 'Professional program focused on practical IT support: troubleshooting, systems administration fundamentals, networking basics, and security best practices.',
+      es: 'Programa profesional enfocado en soporte técnico práctico: resolución de problemas, fundamentos de administración de sistemas, redes y buenas prácticas de seguridad.'
     }
   },
   {
@@ -272,9 +298,23 @@ const translations = {
       title: "Bóveda de Certificados",
       subtitle: "Explora mis credenciales activas verificadas directamente por las organizaciones emisoras.",
       allProviders: "Todos los Proveedores",
+      specialization: "Certificaciones de Especialización",
       searchPlaceholder: "Filtrar por habilidad o título...",
       noResults: "No se encontraron certificados",
       noResultsDesc: "Intenta ajustar tus filtros o búsqueda."
+    },
+    specializationMode: {
+      heading: "Certificaciones de Especialización",
+      subheading: "Paneles avanzados de programas completos y credenciales profesionales verificables.",
+      professional: "Certificación Profesional",
+      completeProgram: "Programa Completo",
+      competencies: "Competencias adquiridas",
+      modules: "Módulos incluidos",
+      credential: "Credencial",
+      type: "Tipo",
+      issuer: "Institución emisora",
+      viewCertificate: "Ver certificado",
+      verifyCredential: "Verificar credencial"
     },
     timeline: {
       title: "Ruta de Aprendizaje",
@@ -339,9 +379,23 @@ const translations = {
       title: "Certificate Vault",
       subtitle: "Browse my active credentials verified directly by issuing organizations.",
       allProviders: "All Providers",
+      specialization: "Specialization Certifications",
       searchPlaceholder: "Filter by skill or title...",
       noResults: "No certificates found",
       noResultsDesc: "Try adjusting your filters or search query."
+    },
+    specializationMode: {
+      heading: "Specialization Certifications",
+      subheading: "Advanced panels for complete programs and formally verifiable professional credentials.",
+      professional: "Professional Certification",
+      completeProgram: "Complete Program",
+      competencies: "Competencies acquired",
+      modules: "Included modules",
+      credential: "Credential",
+      type: "Type",
+      issuer: "Issuing institution",
+      viewCertificate: "View certificate",
+      verifyCredential: "Verify credential"
     },
     timeline: {
       title: "Learning Path",
@@ -614,6 +668,183 @@ const CertificateCard = ({ cert, onClick }) => {
   );
 };
 
+// 2.6 SPECIALIZATION PANEL (ADVANCED VIEW)
+const SpecializationCertificatePanel = ({ cert, translations: t, language, onOpenDetails }) => {
+  const theme = PROVIDERS[cert.provider];
+  const description = typeof cert.description === 'object' ? (cert.description[language] || cert.description.en) : cert.description;
+
+  const statusText =
+    typeof cert.statusLabel === 'object'
+      ? (cert.statusLabel[language] || cert.statusLabel.en)
+      : cert.statusLabel;
+
+  return (
+    <article className="group relative rounded-2xl border border-slate-800 bg-slate-900/35 backdrop-blur-sm overflow-hidden transition-all duration-500 ease-in-out hover:border-slate-700/70 hover:bg-slate-900/45 hover:-translate-y-0.5 hover:shadow-[0_20px_70px_-35px_rgba(0,0,0,0.75)] max-w-5xl mx-auto">
+      {/* Subtle depth layers */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.035] to-transparent pointer-events-none" />
+      <div className={`absolute inset-x-0 top-0 h-[2px] ${theme.bg} opacity-70`} />
+
+      <div className="relative p-4 sm:p-5 lg:p-6">
+        {/* Header */}
+        <div className="flex flex-col gap-3 sm:gap-4">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className="inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-950/40 px-3 py-1 text-[11px] font-semibold tracking-wide text-slate-300">
+                  <span className={`h-1.5 w-1.5 rounded-full ${theme.bg}`} />
+                  {t.specializationMode.professional}
+                </span>
+                {statusText && (
+                  <span className="inline-flex items-center rounded-full border border-slate-700/60 bg-slate-950/30 px-3 py-1 text-[11px] font-medium tracking-wide text-slate-400">
+                    {statusText}
+                  </span>
+                )}
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-100 leading-tight tracking-tight">
+                {cert.title}
+              </h3>
+
+              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                <span className={`font-semibold ${theme.color}`}>{theme.name}</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-slate-400">{cert.area}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Body */}
+          <div className="grid lg:grid-cols-12 gap-4 lg:gap-6 pt-3 border-t border-slate-800/70">
+            {/* Main content */}
+            <div className="lg:col-span-8 space-y-4">
+              <p className="text-sm leading-relaxed text-slate-300/90 max-h-28 overflow-y-auto pr-1">
+                {description}
+              </p>
+
+              <div>
+                <div className="text-[11px] uppercase tracking-widest text-slate-500 font-semibold mb-2">
+                  {t.specializationMode.competencies}
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {cert.skills.map((s) => (
+                    <span
+                      key={s}
+                      className="rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-2 text-[11px] font-medium text-slate-300"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {Array.isArray(cert.modules) && cert.modules.length > 0 && (
+                <details className="rounded-xl border border-slate-800 bg-slate-950/30 px-4 py-3">
+                  <summary className="cursor-pointer select-none list-none flex items-center justify-between gap-3">
+                    <span className="text-[11px] uppercase tracking-widest text-slate-500 font-semibold">
+                      {t.specializationMode.modules}
+                    </span>
+                    <span className="text-xs text-slate-500">
+                      {cert.modules.length} items
+                    </span>
+                  </summary>
+                  <div className="mt-3 grid sm:grid-cols-2 gap-2">
+                    {cert.modules.map((m, idx) => {
+                      const text = typeof m === 'object' ? (m[language] || m.en) : m;
+                      return (
+                        <div key={`${cert.id}-m-${idx}`} className="text-sm text-slate-300/90">
+                          <span className="text-slate-600 mr-2 font-mono text-xs">{String(idx + 1).padStart(2, '0')}</span>
+                          {text}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </details>
+              )}
+            </div>
+
+            {/* Credential / actions */}
+            <div className="lg:col-span-4">
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/45 p-4 sm:p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="text-[11px] uppercase tracking-widest text-slate-500 font-semibold">
+                    {t.specializationMode.credential}
+                  </div>
+                  <span className="inline-flex items-center gap-2 text-xs text-slate-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/80" />
+                    Verified
+                  </span>
+                </div>
+
+                {/* Emblema de especialización */}
+                <div className="flex items-center justify-center py-1">
+                  <img
+                    src={specializationEmblem}
+                    alt="Emblema de Certificaciones de Especialización"
+                    className="max-h-16 w-auto opacity-90 mix-blend-screen pointer-events-none select-none"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Metadatos compactos dentro de Credencial */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <div className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">
+                      {t.modal.issued}
+                    </div>
+                    <div className="text-sm text-slate-200 font-medium">{cert.issueDate}</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">
+                      {t.specializationMode.type}
+                    </div>
+                    <div className="text-sm text-slate-200 font-medium">
+                      {cert.certificationType || cert.level}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">
+                    {t.specializationMode.issuer}
+                  </div>
+                  <div className={`text-sm font-semibold ${theme.color}`}>{theme.name}</div>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="text-[10px] uppercase tracking-widest text-slate-600 font-semibold">
+                    {t.modal.credentialId}
+                  </div>
+                  <div className="rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-2 text-xs font-mono text-slate-300 break-all">
+                    {cert.credentialId}
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-col gap-2">
+                  <Button
+                    className="w-full justify-center"
+                    icon={ExternalLink}
+                    onClick={() => window.open(cert.verificationUrl, '_blank', 'noopener,noreferrer')}
+                  >
+                    {t.specializationMode.viewCertificate}
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="w-full justify-center"
+                    icon={ShieldCheck}
+                    onClick={() => window.open(cert.verificationUrl, '_blank', 'noopener,noreferrer')}
+                  >
+                    {t.specializationMode.verifyCredential}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
 // 2.5. LANGUAGE TOGGLE COMPONENT
 const LanguageToggle = ({ currentLang, onLanguageChange }) => {
   return (
@@ -686,6 +917,7 @@ const PortfolioApp = () => {
   });
 
   const t = translations[language];
+  const [specializationEntered, setSpecializationEntered] = useState(false);
 
   // Función para obtener la URL de la página principal según el entorno
   const getMainPageUrl = (anchor = '') => {
@@ -746,11 +978,26 @@ const PortfolioApp = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Elegant enter transition for specialization mode
+  useEffect(() => {
+    if (selectedProvider === 'SPECIALIZATION') {
+      setSpecializationEntered(false);
+      const timer = setTimeout(() => setSpecializationEntered(true), 40);
+      return () => clearTimeout(timer);
+    }
+    setSpecializationEntered(false);
+  }, [selectedProvider]);
+
 
   // Filter Logic
   const filteredCerts = useMemo(() => {
     return CERTIFICATES_DATA.filter(cert => {
-      const matchProvider = selectedProvider === 'ALL' || cert.provider === selectedProvider;
+      const matchProvider = 
+        selectedProvider === 'ALL'
+          ? true
+          : selectedProvider === 'SPECIALIZATION'
+            ? cert.isSpecialization === true
+            : cert.provider === selectedProvider;
       const matchSearch = cert.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           cert.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchProvider && matchSearch;
@@ -918,7 +1165,7 @@ const PortfolioApp = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
              {/* Tabs / Switcher */}
              <div className="flex p-1 bg-slate-900 rounded-lg border border-slate-800 overflow-x-auto max-w-full">
-                {['ALL', 'GOOGLE', 'MICROSOFT', 'IBM', 'AWS'].map((prov) => (
+               {['ALL', 'SPECIALIZATION', 'GOOGLE', 'MICROSOFT', 'IBM', 'AWS'].map((prov) => (
                   <button
                     key={prov}
                     onClick={() => setSelectedProvider(prov)}
@@ -928,7 +1175,11 @@ const PortfolioApp = () => {
                       : 'text-slate-500 hover:text-slate-300'
                     }`}
                   >
-                    {prov === 'ALL' ? t.explorer.allProviders : PROVIDERS[prov].name}
+                    {prov === 'ALL' 
+                      ? t.explorer.allProviders 
+                      : prov === 'SPECIALIZATION'
+                        ? t.explorer.specialization
+                        : PROVIDERS[prov].name}
                   </button>
                 ))}
              </div>
@@ -948,15 +1199,44 @@ const PortfolioApp = () => {
 
           {/* Grid */}
           {filteredCerts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCerts.map((cert) => (
-                <CertificateCard 
-                  key={cert.id} 
-                  cert={cert} 
-                  onClick={setSelectedCert} 
-                />
-              ))}
-            </div>
+            selectedProvider === 'SPECIALIZATION' ? (
+              <div
+                className={`max-w-6xl mx-auto transition-all duration-500 ease-in-out ${
+                  specializationEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                }`}
+              >
+                <div className="mb-8 sm:mb-10 rounded-2xl border border-slate-800 bg-slate-900/25 backdrop-blur-sm p-5 sm:p-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    {t.specializationMode.heading}
+                  </h3>
+                  <p className="mt-2 text-sm sm:text-[15px] text-slate-400 leading-relaxed max-w-3xl">
+                    {t.specializationMode.subheading}
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {filteredCerts.map((cert) => (
+                    <SpecializationCertificatePanel
+                      key={cert.id}
+                      cert={cert}
+                      translations={t}
+                      language={language}
+                      onOpenDetails={setSelectedCert}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredCerts.map((cert) => (
+                  <CertificateCard 
+                    key={cert.id} 
+                    cert={cert} 
+                    onClick={setSelectedCert} 
+                  />
+                ))}
+              </div>
+            )
           ) : (
             <div className="text-center py-20 border border-dashed border-slate-800 rounded-2xl">
               <Filter className="mx-auto text-slate-600 mb-4" size={48} />
@@ -1024,16 +1304,24 @@ const PortfolioApp = () => {
               <p className="text-slate-400 mb-8 max-w-md mx-auto">
                  {t.footer.subtitle}
               </p>
-              <div className="flex justify-center gap-4 mb-16">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16 max-w-xl mx-auto">
                  <Button 
+                   className="w-full sm:w-auto"
                    onClick={() => window.location.href = 'mailto:jarmando2965@gmail.com'}
                  >
                    {t.footer.contact}
                  </Button>
-                 <Button variant="secondary" icon={Share2}>{t.footer.share}</Button>
+                 <Button 
+                   variant="secondary" 
+                   icon={Share2}
+                   className="w-full sm:w-auto"
+                 >
+                   {t.footer.share}
+                 </Button>
                  <Button 
                    variant="primary" 
                    icon={ExternalLink}
+                   className="w-full sm:w-auto"
                    onClick={() => {
                      // Ruta relativa desde certificates-app hacia public/proyectos.html
                      window.location.href = '../../public/proyectos.html';
