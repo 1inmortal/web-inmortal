@@ -250,5 +250,17 @@
     "sound": "mp3/hover.mp3",
     "link": "https://1inmortal.github.io/web-inmortal/cenaduria/index.html",
     "categoryFilter": "gsap"
+  },
+  {
+    "id": 22,
+    "artist": "TITAN X1",
+    "album": "THE VAULT",
+    "category": "WEB APP",
+    "label": "LAUNCH",
+    "year": "2025",
+    "image": "https://assets.codepen.io/7558/portrait-fashion-004.jpg",
+    "sound": "mp3/hover.mp3",
+    "link": "https://1inmortal.github.io/web-inmortal/titan-x1/",
+    "categoryFilter": "gsap"
   }
 ]
