@@ -11,51 +11,27 @@ import * as THREE from 'three';
         const $ = (s) => document.querySelector(s);
         const $$ = (s) => document.querySelectorAll(s);
 
-        // Detectar base path desde la ubicación del script en el DOM
+        // Detectar base path desde window.location para GitHub Pages
         const getBasePath = () => {
-            // Método 1: Buscar el script actual en el DOM
-            try {
-                const scripts = document.querySelectorAll('script[type="module"]');
-                for (const script of scripts) {
-                    if (script.src && script.src.includes('vault-app.js')) {
-                        const scriptUrl = new URL(script.src, window.location.href);
-                        const scriptPath = scriptUrl.pathname;
-                        const basePath = scriptPath.substring(0, scriptPath.lastIndexOf('/') + 1);
-                        console.log('Base path desde script DOM:', basePath);
-                        return basePath;
-                    }
-                }
-            } catch (e) {
-                console.warn('Error buscando script en DOM:', e);
-            }
-            
-            // Método 2: Usar import.meta.url si está disponible
-            try {
-                const scriptUrl = new URL(import.meta.url);
-                const scriptPath = scriptUrl.pathname;
-                const basePath = scriptPath.substring(0, scriptPath.lastIndexOf('/') + 1);
-                console.log('Base path desde import.meta.url:', basePath);
-                return basePath;
-            } catch (e) {
-                console.warn('No se pudo usar import.meta.url:', e);
-            }
-            
-            // Método 3: Fallback a window.location.pathname
             const pathname = window.location.pathname;
             console.log('Pathname completo:', pathname);
+            
+            // Extraer el directorio base (todo hasta el último /)
+            // Si es /web-inmortal/titan-x1/index.html -> /web-inmortal/titan-x1/
+            // Si es /web-inmortal/titan-x1/ -> /web-inmortal/titan-x1/
             const lastSlash = pathname.lastIndexOf('/');
             if (lastSlash > 0) {
                 const basePath = pathname.substring(0, lastSlash + 1);
-                console.log('Base path desde pathname:', basePath);
+                console.log('Base path extraído:', basePath);
                 return basePath;
             }
             
+            // Si no hay slash, usar raíz
             console.warn('No se pudo extraer base path, usando raíz');
             return '/';
         };
         const basePath = getBasePath();
         const GLB_PATH = basePath + 'asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb';
-        console.log('Base path detectado:', basePath);
         console.log('GLB_PATH final:', GLB_PATH);
         const D2R = Math.PI / 180;
 

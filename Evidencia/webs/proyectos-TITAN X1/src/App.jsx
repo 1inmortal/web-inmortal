@@ -27,7 +27,18 @@ function App() {
     return () => { clearInterval(t); clearTimeout(timeout); };
   }, []);
 
-  return <div ref={rootRef} id="app-root" className="app-root" dangerouslySetInnerHTML={{ __html: BODY_HTML }} />;
+  return (
+    <>
+      <div ref={rootRef} id="app-root" className="app-root" dangerouslySetInnerHTML={{ __html: BODY_HTML }} />
+      <a 
+        href="https://1inmortal.github.io/web-inmortal/proyectos/index.html"
+        className="back-to-projects-btn"
+        aria-label="Volver a proyectos"
+      >
+        ←
+      </a>
+    </>
+  );
 }
 
 export default App;

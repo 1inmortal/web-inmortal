@@ -324,3 +324,31 @@ html, body, #root { width: 100%; min-height: 100%; }
             border-bottom: 6px solid transparent;
             border-left: 12px solid var(--accent);
         }
+
+        /* --- Back to Projects Button --- */
+        .back-to-projects-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+        .back-to-projects-btn:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+            transform: scale(1.1);
+        }
