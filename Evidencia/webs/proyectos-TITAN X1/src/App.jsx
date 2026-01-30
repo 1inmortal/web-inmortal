@@ -14,7 +14,9 @@ function App() {
 
       const script = document.createElement('script');
       script.type = 'module';
-      script.src = '/vault-app.js';
+      // Usar BASE_URL de Vite para que funcione con GitHub Pages
+      const baseUrl = import.meta.env.BASE_URL;
+      script.src = `${baseUrl}vault-app.js`.replace(/\/\//g, '/'); // Evitar doble slash
       script.onload = () => console.log('✓ vault-app.js cargado');
       script.onerror = (e) => console.error('✗ Error cargando vault-app.js', e);
       document.body.appendChild(script);
