@@ -119,7 +119,7 @@ function GeneratedApp() {
           <img src="./png/flores.png" alt="Las Flores" className="hero-logo" />
           <p className="hero-tagline accent-font">Estilo Mante • Desde 1985</p>
           <h1 className="split-text">Tradición<br />Viva</h1>
-          <div style={{ marginTop: '3rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+          <div style={{ marginTop: '-4rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <div className="magnetic-wrap">
               <a href="#menu" className="btn btn-primary" data-cursor="hover">Ver Menú</a>
             </div>
