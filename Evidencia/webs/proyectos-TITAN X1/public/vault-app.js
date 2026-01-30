@@ -11,26 +11,38 @@ import * as THREE from 'three';
         const $ = (s) => document.querySelector(s);
         const $$ = (s) => document.querySelectorAll(s);
 
-        // Detectar base path desde la ubicación del script para GitHub Pages
+        // Detectar base path desde window.location para GitHub Pages
         const getBasePath = () => {
-            try {
-                // Obtener la URL del script actual
-                const scriptUrl = new URL(import.meta.url);
-                // Extraer el pathname y remover el nombre del archivo
-                const pathname = scriptUrl.pathname;
-                const basePath = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+            const pathname = window.location.pathname;
+            // Si está en /titan-x1/, extraer el base path completo
+            if (pathname.includes('/titan-x1/')) {
+                const basePath = pathname.substring(0, pathname.indexOf('/titan-x1/') + '/titan-x1/'.length);
                 return basePath;
-            } catch (e) {
-                // Fallback: detectar desde window.location
-                const pathname = window.location.pathname;
-                // Si está en /titan-x1/, usar ese base path
-                if (pathname.includes('/titan-x1/')) {
-                    return pathname.substring(0, pathname.indexOf('/titan-x1/') + '/titan-x1/'.length);
-                }
-                return '/';
             }
+            // Si está en /titan-x1 (sin trailing slash), añadirlo
+            if (pathname.includes('/titan-x1')) {
+                const basePath = pathname.substring(0, pathname.indexOf('/titan-x1') + '/titan-x1'.length) + '/';
+                return basePath;
+            }
+            // Fallback: usar la ruta del script si está disponible
+            try {
+                const scripts = document.querySelectorAll('script[type="module"]');
+                for (const script of scripts) {
+                    if (script.src && script.src.includes('vault-app.js')) {
+                        const scriptUrl = new URL(script.src);
+                        return scriptUrl.pathname.substring(0, scriptUrl.pathname.lastIndexOf('/') + 1);
+                    }
+                }
+            } catch (e) {
+                console.warn('No se pudo detectar base path desde script:', e);
+            }
+            // Último fallback: raíz
+            return '/';
         };
-        const GLB_PATH = getBasePath() + 'asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb';
+        const basePath = getBasePath();
+        console.log('Base path detectado:', basePath);
+        const GLB_PATH = basePath + 'asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb';
+        console.log('GLB_PATH:', GLB_PATH);
         const D2R = Math.PI / 180;
 
         // --- Three.js: rig data for GSAP (degrees / percent) ---
