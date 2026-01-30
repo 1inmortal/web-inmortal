@@ -14,35 +14,25 @@ import * as THREE from 'three';
         // Detectar base path desde window.location para GitHub Pages
         const getBasePath = () => {
             const pathname = window.location.pathname;
-            // Si está en /titan-x1/, extraer el base path completo
-            if (pathname.includes('/titan-x1/')) {
-                const basePath = pathname.substring(0, pathname.indexOf('/titan-x1/') + '/titan-x1/'.length);
+            console.log('Pathname completo:', pathname);
+            
+            // Extraer el directorio base (todo hasta el último /)
+            // Si es /web-inmortal/titan-x1/index.html -> /web-inmortal/titan-x1/
+            // Si es /web-inmortal/titan-x1/ -> /web-inmortal/titan-x1/
+            const lastSlash = pathname.lastIndexOf('/');
+            if (lastSlash > 0) {
+                const basePath = pathname.substring(0, lastSlash + 1);
+                console.log('Base path extraído:', basePath);
                 return basePath;
             }
-            // Si está en /titan-x1 (sin trailing slash), añadirlo
-            if (pathname.includes('/titan-x1')) {
-                const basePath = pathname.substring(0, pathname.indexOf('/titan-x1') + '/titan-x1'.length) + '/';
-                return basePath;
-            }
-            // Fallback: usar la ruta del script si está disponible
-            try {
-                const scripts = document.querySelectorAll('script[type="module"]');
-                for (const script of scripts) {
-                    if (script.src && script.src.includes('vault-app.js')) {
-                        const scriptUrl = new URL(script.src);
-                        return scriptUrl.pathname.substring(0, scriptUrl.pathname.lastIndexOf('/') + 1);
-                    }
-                }
-            } catch (e) {
-                console.warn('No se pudo detectar base path desde script:', e);
-            }
-            // Último fallback: raíz
+            
+            // Si no hay slash, usar raíz
+            console.warn('No se pudo extraer base path, usando raíz');
             return '/';
         };
         const basePath = getBasePath();
-        console.log('Base path detectado:', basePath);
         const GLB_PATH = basePath + 'asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb';
-        console.log('GLB_PATH:', GLB_PATH);
+        console.log('GLB_PATH final:', GLB_PATH);
         const D2R = Math.PI / 180;
 
         // --- Three.js: rig data for GSAP (degrees / percent) ---
