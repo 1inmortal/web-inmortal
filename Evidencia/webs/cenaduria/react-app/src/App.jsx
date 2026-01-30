@@ -132,18 +132,19 @@ function GeneratedApp() {
 
       {/* Gallery */}
       <section className="gallery-wrapper" id="gallery">
+        <div className="background-image" id="backgroundImage" role="img" aria-hidden="true"></div>
         <div className="gallery-track">
-          <div className="gallery-img">
+          <div className="gallery-img" data-bg-image="/img/png/flores-bg.png">
             <img src="https://images.unsplash.com/photo-1599321955726-e04852be82d2?q=80&w=1000" alt="Platillo 1" loading="lazy" />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', maxWidth: '500px', padding: '0 1rem' }}>
             <h2 className="serif" style={{ fontSize: '3rem', color: 'var(--mx-pink)', marginBottom: '1rem' }}>Raíces</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--ink)' }}>Nuestra cocina honra los ingredientes de la tierra. Cada tortilla es hecha a mano, cada salsa molcajeteada al momento.</p>
           </div>
-          <div className="gallery-img">
+          <div className="gallery-img" data-bg-image="/img/png/flores-bg.png">
             <img src="https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?q=80&w=1000" alt="Ambiente" loading="lazy" />
           </div>
-          <div className="gallery-img">
+          <div className="gallery-img" data-bg-image="/img/png/flores-bg.png">
             <img src="https://images.unsplash.com/photo-1568106690101-fd6822e876f6?q=80&w=1000" alt="Sopes" loading="lazy" />
           </div>
         </div>

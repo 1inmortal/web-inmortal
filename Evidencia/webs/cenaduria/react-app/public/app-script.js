@@ -55,6 +55,7 @@ if (window.appScriptLoaded) {
         initLoaderAndHero();
         initScrollAnimations(isTouch);
         if (!isTouch) initTiltEffect();
+        initGalleryBackgroundImage();
     })();
 
     function renderMenu() {
@@ -231,6 +232,36 @@ if (window.appScriptLoaded) {
         hoverables.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+    }
+
+    function initGalleryBackgroundImage() {
+        const backgroundImage = document.getElementById('backgroundImage');
+        const galleryImages = document.querySelectorAll('.gallery-img[data-bg-image]');
+        
+        if (!backgroundImage) return;
+        
+        galleryImages.forEach(imgEl => {
+            imgEl.addEventListener('mouseenter', () => {
+                const imageUrl = imgEl.getAttribute('data-bg-image');
+                if (imageUrl) {
+                    backgroundImage.style.backgroundImage = `url("${imageUrl}")`;
+                    backgroundImage.style.transition = 'none';
+                    backgroundImage.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                    backgroundImage.style.opacity = '1';
+                    
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            backgroundImage.style.transition = 'opacity 0.6s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                            backgroundImage.style.transform = 'translate(-50%, -50%) scale(1.0)';
+                        });
+                    });
+                }
+            });
+            
+            imgEl.addEventListener('mouseleave', () => {
+                backgroundImage.style.opacity = '0';
+            });
         });
     }
 }
