@@ -11,24 +11,30 @@ import * as THREE from 'three';
         const $ = (s) => document.querySelector(s);
         const $$ = (s) => document.querySelectorAll(s);
 
-        // Detectar base path desde window.location para GitHub Pages
+        // Detectar base path desde la ubicación del script (import.meta.url) o window.location
         const getBasePath = () => {
-            const pathname = window.location.pathname;
-            console.log('Pathname completo:', pathname);
-            
-            // Extraer el directorio base (todo hasta el último /)
-            // Si es /web-inmortal/titan-x1/index.html -> /web-inmortal/titan-x1/
-            // Si es /web-inmortal/titan-x1/ -> /web-inmortal/titan-x1/
-            const lastSlash = pathname.lastIndexOf('/');
-            if (lastSlash > 0) {
-                const basePath = pathname.substring(0, lastSlash + 1);
-                console.log('Base path extraído:', basePath);
+            try {
+                // Intentar usar import.meta.url para obtener la ubicación del script
+                const scriptUrl = new URL(import.meta.url);
+                const scriptPath = scriptUrl.pathname;
+                // Extraer el directorio donde está el script (vault-app.js)
+                const basePath = scriptPath.substring(0, scriptPath.lastIndexOf('/') + 1);
+                console.log('Base path desde import.meta.url:', basePath);
                 return basePath;
+            } catch (e) {
+                console.warn('No se pudo usar import.meta.url, usando window.location:', e);
+                // Fallback: usar window.location.pathname
+                const pathname = window.location.pathname;
+                console.log('Pathname completo:', pathname);
+                const lastSlash = pathname.lastIndexOf('/');
+                if (lastSlash > 0) {
+                    const basePath = pathname.substring(0, lastSlash + 1);
+                    console.log('Base path desde pathname:', basePath);
+                    return basePath;
+                }
+                console.warn('No se pudo extraer base path, usando raíz');
+                return '/';
             }
-            
-            // Si no hay slash, usar raíz
-            console.warn('No se pudo extraer base path, usando raíz');
-            return '/';
         };
         const basePath = getBasePath();
         const GLB_PATH = basePath + 'asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb';
