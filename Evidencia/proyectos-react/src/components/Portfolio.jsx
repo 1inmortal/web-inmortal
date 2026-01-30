@@ -14,6 +14,7 @@ import { useIdleAnimation } from '../hooks/useIdleAnimation';
 import { useAudio } from '../hooks/useAudio';
 import { usePreloadImages } from '../hooks/usePreloadImages';
 import { throttle } from '../utils/throttle';
+import { resolveImageUrl } from '../utils/resolveImageUrl';
 import projectsData from '../data/projects.json';
 
 /**
@@ -66,7 +67,14 @@ const Portfolio = () => {
   const handleProjectHover = (project, index) => {
     setActiveProjectIndex(index);
     if (project.image) {
-      setBackgroundImageUrl(project.image);
+      // Resolver la URL de la imagen con el base path
+      const resolvedUrl = resolveImageUrl(project.image);
+      // Si la URL no es absoluta, agregar el base path
+      const baseUrl = import.meta.env.BASE_URL || '/web-inmortal/proyectos/';
+      const finalUrl = resolvedUrl.startsWith('http') || resolvedUrl.startsWith('/') || resolvedUrl.startsWith('./') || resolvedUrl.startsWith('../')
+        ? resolvedUrl
+        : `${baseUrl}${resolvedUrl}`.replace(/\/+/g, '/');
+      setBackgroundImageUrl(finalUrl);
     }
     
     // Agregar clase has-active al contenedor

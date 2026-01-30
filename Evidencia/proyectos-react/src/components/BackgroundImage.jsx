@@ -35,9 +35,17 @@ const BackgroundImage = forwardRef(({ imageUrl }, ref) => {
 
   useEffect(() => {
     if (imageUrl && imageRef.current) {
+      // Asegurar que la URL esté correctamente formateada
+      let finalUrl = imageUrl;
+      if (!finalUrl.startsWith('http') && !finalUrl.startsWith('data:') && !finalUrl.startsWith('/')) {
+        // Si no tiene prefijo, agregar el base path
+        const baseUrl = import.meta.env.BASE_URL || '/web-inmortal/proyectos/';
+        finalUrl = `${baseUrl}${finalUrl}`.replace(/\/+/g, '/');
+      }
+      
       imageRef.current.style.transition = 'none';
       imageRef.current.style.transform = 'translate(-50%, -50%) scale(1.2)';
-      imageRef.current.style.backgroundImage = `url(${imageUrl})`;
+      imageRef.current.style.backgroundImage = `url(${finalUrl})`;
       imageRef.current.style.opacity = '1';
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {

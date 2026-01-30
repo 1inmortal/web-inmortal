@@ -258,7 +258,7 @@
     "category": "WEB APP",
     "label": "LAUNCH",
     "year": "2025",
-    "image": "img/png/asus rog/asus rog.png",
+    "image": "/web-inmortal/proyectos/img/png/asus rog/asus rog.png",
     "sound": "mp3/hover.mp3",
     "link": "https://1inmortal.github.io/web-inmortal/titan-x1/",
     "categoryFilter": "gsap"
