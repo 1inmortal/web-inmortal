@@ -64,6 +64,14 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build TITAN X1 App
+        working-directory: ./Evidencia/webs/proyectos-TITAN X1
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          npm ci
+          npm run build
+
       - name: Copy Certificates to Portfolio Dist
         run: |
           # Copiar los archivos de certificados al dist del portfolio
@@ -81,6 +89,11 @@ jobs:
           # Copiar los archivos de cenaduria al dist del portfolio
           mkdir -p portfolio-react/dist/cenaduria
           cp -r Evidencia/webs/cenaduria/react-app/dist/* portfolio-react/dist/cenaduria/
+
+      - name: Copy TITAN X1 to Portfolio Dist
+        run: |
+          mkdir -p portfolio-react/dist/titan-x1
+          cp -r Evidencia/webs/proyectos-TITAN\ X1/dist/* portfolio-react/dist/titan-x1/
 
       - name: Create .nojekyll file
         working-directory: ./portfolio-react/dist

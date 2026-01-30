@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #root { width: 100%; min-height: 100%; }
+/* --- RESET & BASE --- */
+        :root {
+            /* Themes: Stealth (Default), Power, Thermal, XRay */
+            --bg-primary: #030304;
+            --accent: #00f0ff;
+            --surface: rgba(255,255,255,0.03);
+            --scanline-alpha: 0.05;
+            --vignette: radial-gradient(circle at center, transparent 0%, #000 120%);
+            --easing-smooth: cubic-bezier(0.2, 0.0, 0.2, 1);
+            --font-display: 'Syncopate', sans-serif;
+            --font-tech: 'JetBrains Mono', monospace;
+            
+            /* 3D Rig Variables */
+            --laptop-width: 60vmin;
+            --laptop-depth: 40vmin;
+            --base-thickness: 1.5vmin;
+        }
+
+        /* --- MODE: POWER (Scene 2) --- */
+        [data-theme="power"] {
+            --accent: #ff2a00;
+            --bg-primary: #0a0202;
+            --scanline-alpha: 0.15;
+        }
+
+        /* --- MODE: DISPLAY (Scene 4) --- */
+        [data-theme="display"] {
+            --accent: #ffffff;
+            --bg-primary: #111;
+            --surface: rgba(255,255,255,0.1);
+        }
+
+        /* --- MODE: XRAY (Scene 5) --- */
+        [data-theme="xray"] {
+            --accent: #00ff66;
+            --bg-primary: #020804;
+            --surface: rgba(0, 255, 102, 0.05);
+        }
+
+        /* --- MODE: I/O PORTS --- */
+        [data-theme="ports"] {
+            --accent: #00d4ff;
+            --bg-primary: #030508;
+            --surface: rgba(0, 212, 255, 0.06);
+        }
+
+        /* --- MODE: AIRFLOW / UNDERSIDE --- */
+        [data-theme="airflow"] {
+            --accent: #ff6600;
+            --bg-primary: #080502;
+            --surface: rgba(255, 102, 0, 0.06);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: white;
+            font-family: var(--font-tech);
+            overflow-x: hidden;
+            transition: background-color 1s ease;
+        }
+
+        /* Disable scroll initially for preloader */
+        body.is-locked { overflow: hidden; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+        /* --- LAYERS & Z-INDEX --- */
+        #app { position: relative; width: 100%; }
+        
+        .layer-fixed {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+        }
+
+        /* --- NOISE & SCANLINES --- */
+        .overlay-fx {
+            z-index: 900;
+            background: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            opacity: var(--scanline-alpha);
+            mix-blend-mode: overlay;
+            transition: opacity 0.5s ease;
+        }
+
+        /* --- HUD --- */
+        .hud-layer { z-index: 800; padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; }
+
+        /* --- Hero Intro Overlay (Mission Brief) --- */
+        #hero-intro {
+            position: fixed;
+            inset: 0;
+            z-index: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(1rem, 4vw, 3rem);
+            background: rgba(3, 3, 4, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            pointer-events: auto;
+            visibility: hidden;
+            opacity: 0;
+        }
+        #hero-intro.is-visible { visibility: visible; }
+        .hero-intro-inner {
+            text-align: center;
+            max-width: 90vw;
+        }
+        .hero-intro-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 4vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+        .hero-intro-subtitle {
+            font-family: var(--font-tech);
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        .hero-intro-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .hero-intro-cta-text {
+            font-family: var(--font-tech);
+            font-size: clamp(0.6rem, 2vw, 0.7rem);
+            letter-spacing: 0.25em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .hero-intro-indicator {
+            width: 2px;
+            height: 28px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            border-radius: 2px;
+            transform-origin: center center;
+        }
+        .hud-bar { width: 2px; height: 0%; background: var(--accent); position: absolute; left: 0; top: 0; transition: height 0.1s linear; }
+        
+        /* --- 3D VIEWPORT (Three.js canvas) --- */
+        #viewport {
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #three-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* --- SCROLL SECTIONS --- */
+        #scroll-track { position: relative; z-index: 200; }
+        
+        .scene {
+            height: 200vh; /* Long scroll for scrubbing */
+            position: relative;
+            pointer-events: none; /* Pass thru to HUD */
+        }
+        .scene-content {
+            height: 100vh;
+            position: sticky; top: 0;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 4rem;
+            pointer-events: none;
+        }
+        .scene-text {
+            pointer-events: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            mix-blend-mode: exclusion;
+        }
+
+        /* --- TRANSITION ELEMENTS --- */
+        .curtain-iris {
+            position: fixed; inset: 0; z-index: 1000;
+            background: black;
+            clip-path: circle(150% at 50% 50%);
+            pointer-events: none;
+        }
+
+        .btn-glitch {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .btn-glitch::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transition: 0.5s;
+        }
+        .btn-glitch:hover::before { left: 100%; }
+
+        /* --- HOTSPOTS HUD (overlay DOM) --- */
+        #hotspots-container {
+            position: fixed;
+            inset: 0;
+            z-index: 400;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hotspot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transform: translate3d(-9999px, -9999px, 0);
+            transition: none;
+            will-change: transform;
+        }
+        .hotspot.is-visible {
+            opacity: 1;
+        }
+        .hotspot-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform-origin: left center;
+            box-shadow: 0 0 8px var(--accent);
+        }
+        .hotspot-label {
+            position: absolute;
+            font-family: var(--font-tech);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            white-space: nowrap;
+            padding: 4px 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.7);
+            margin-left: 0;
+            box-shadow: 0 0 12px rgba(0,240,255,0.2);
+        }
+        .hotspot-label.pulse {
+            animation: hotspot-pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes hotspot-pulse {
+            0%, 100% { box-shadow: 0 0 12px rgba(0,240,255,0.2); }
+            50% { box-shadow: 0 0 20px var(--accent); }
+        }
+        .hotspot-crosshair {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            margin-left: -10px;
+            margin-top: -10px;
+            pointer-events: none;
+            z-index: 500;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+        .hotspot-crosshair::before,
+        .hotspot-crosshair::after {
+            content: '';
+            position: absolute;
+            background: var(--accent);
+        }
+        .hotspot-crosshair::before { left: 50%; top: 0; width: 2px; height: 100%; margin-left: -1px; }
+        .hotspot-crosshair::after { top: 50%; left: 0; height: 2px; width: 100%; margin-top: -1px; }
+
+        /* --- SPEC PANELS (I/O, Display, Airflow) --- */
+        .spec-panel {
+            max-width: 420px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+        }
+        .spec-panel h3 {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        .spec-panel ul {
+            list-style: none;
+            font-size: 11px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+        }
+        .spec-panel li::before {
+            content: '>';
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+        .airflow-hud {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 10px;
+            color: var(--accent);
+        }
+        .airflow-hud .arrow {
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 12px solid var(--accent);
+        }
