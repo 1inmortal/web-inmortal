@@ -11,7 +11,26 @@ import * as THREE from 'three';
         const $ = (s) => document.querySelector(s);
         const $$ = (s) => document.querySelectorAll(s);
 
-        const GLB_PATH = '/asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb';
+        // Detectar base path desde la ubicación del script para GitHub Pages
+        const getBasePath = () => {
+            try {
+                // Obtener la URL del script actual
+                const scriptUrl = new URL(import.meta.url);
+                // Extraer el pathname y remover el nombre del archivo
+                const pathname = scriptUrl.pathname;
+                const basePath = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+                return basePath;
+            } catch (e) {
+                // Fallback: detectar desde window.location
+                const pathname = window.location.pathname;
+                // Si está en /titan-x1/, usar ese base path
+                if (pathname.includes('/titan-x1/')) {
+                    return pathname.substring(0, pathname.indexOf('/titan-x1/') + '/titan-x1/'.length);
+                }
+                return '/';
+            }
+        };
+        const GLB_PATH = getBasePath() + 'asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb';
         const D2R = Math.PI / 180;
 
         // --- Three.js: rig data for GSAP (degrees / percent) ---
