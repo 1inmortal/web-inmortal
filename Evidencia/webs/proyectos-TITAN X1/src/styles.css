@@ -328,27 +328,41 @@ html, body, #root { width: 100%; min-height: 100%; }
         /* --- Back to Projects Button --- */
         .back-to-projects-btn {
             position: fixed;
-            top: 1rem;
+            top: 3.5rem;
             left: 1rem;
             z-index: 1001;
-            width: 36px;
-            height: 36px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(0, 240, 255, 0.3);
             color: var(--accent);
-            font-size: 18px;
+            font-size: 10px;
             font-weight: bold;
             text-decoration: none;
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
             pointer-events: auto;
+            font-family: var(--font-tech);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .back-btn-icon {
+            font-size: 14px;
+            line-height: 1;
+        }
+        .back-btn-text {
+            font-size: 9px;
+            opacity: 0.9;
         }
         .back-to-projects-btn:hover {
             background: rgba(0, 240, 255, 0.1);
             border-color: var(--accent);
             box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
-            transform: scale(1.1);
+            transform: translateX(2px);
+        }
+        .back-to-projects-btn:hover .back-btn-text {
+            opacity: 1;
         }

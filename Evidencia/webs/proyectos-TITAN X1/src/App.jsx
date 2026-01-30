@@ -34,8 +34,13 @@ function App() {
         href="https://1inmortal.github.io/web-inmortal/proyectos/index.html"
         className="back-to-projects-btn"
         aria-label="Volver a proyectos"
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = 'https://1inmortal.github.io/web-inmortal/proyectos/index.html';
+        }}
       >
-        ←
+        <span className="back-btn-icon">←</span>
+        <span className="back-btn-text">PROYECTOS</span>
       </a>
     </>
   );
