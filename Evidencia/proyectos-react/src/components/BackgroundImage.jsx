@@ -35,18 +35,26 @@ const BackgroundImage = forwardRef(({ imageUrl }, ref) => {
 
   useEffect(() => {
     if (imageUrl && imageRef.current) {
-      // Asegurar que la URL esté correctamente formateada
-      let finalUrl = imageUrl;
-      if (!finalUrl.startsWith('http') && !finalUrl.startsWith('data:') && !finalUrl.startsWith('/')) {
-        // Si no tiene prefijo, agregar el base path
-        const baseUrl = import.meta.env.BASE_URL || '/web-inmortal/proyectos/';
-        finalUrl = `${baseUrl}${finalUrl}`.replace(/\/+/g, '/');
-      }
+      console.log('BackgroundImage: Setting image URL:', imageUrl);
+      
+      // La URL ya viene resuelta desde Portfolio, solo usarla directamente
+      const finalUrl = imageUrl;
       
       imageRef.current.style.transition = 'none';
       imageRef.current.style.transform = 'translate(-50%, -50%) scale(1.2)';
-      imageRef.current.style.backgroundImage = `url(${finalUrl})`;
+      imageRef.current.style.backgroundImage = `url("${finalUrl}")`;
       imageRef.current.style.opacity = '1';
+      
+      // Verificar si la imagen se carga correctamente
+      const img = new Image();
+      img.onload = () => {
+        console.log('BackgroundImage: Image loaded successfully:', finalUrl);
+      };
+      img.onerror = () => {
+        console.error('BackgroundImage: Failed to load image:', finalUrl);
+      };
+      img.src = finalUrl;
+      
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           if (imageRef.current) {
@@ -59,6 +67,7 @@ const BackgroundImage = forwardRef(({ imageUrl }, ref) => {
       });
     } else if (imageRef.current) {
       imageRef.current.style.opacity = '0';
+      imageRef.current.style.backgroundImage = '';
     }
   }, [imageUrl]);
 

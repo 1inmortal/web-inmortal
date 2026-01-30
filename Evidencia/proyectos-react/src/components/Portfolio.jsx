@@ -65,16 +65,33 @@ const Portfolio = () => {
   }, [updateObservers]);
 
   const handleProjectHover = (project, index) => {
+    console.log('handleProjectHover called:', { artist: project.artist, image: project.image, index });
     setActiveProjectIndex(index);
     if (project.image) {
       // Resolver la URL de la imagen con el base path
-      const resolvedUrl = resolveImageUrl(project.image);
-      // Si la URL no es absoluta, agregar el base path
-      const baseUrl = import.meta.env.BASE_URL || '/web-inmortal/proyectos/';
-      const finalUrl = resolvedUrl.startsWith('http') || resolvedUrl.startsWith('/') || resolvedUrl.startsWith('./') || resolvedUrl.startsWith('../')
-        ? resolvedUrl
-        : `${baseUrl}${resolvedUrl}`.replace(/\/+/g, '/');
+      let resolvedUrl = resolveImageUrl(project.image);
+      
+      // Si la URL no es absoluta (http/https) y no empieza con /, agregar el base path
+      if (!resolvedUrl.startsWith('http') && !resolvedUrl.startsWith('data:')) {
+        if (!resolvedUrl.startsWith('/')) {
+          const baseUrl = import.meta.env.BASE_URL || '/web-inmortal/proyectos/';
+          resolvedUrl = `${baseUrl}${resolvedUrl}`.replace(/\/+/g, '/');
+        }
+      }
+      
+      // Usar encodeURI para codificar la URL completa (maneja espacios correctamente)
+      const finalUrl = encodeURI(resolvedUrl).replace(/#/g, '%23');
+      
+      console.log('Setting background image:', {
+        project: project.artist,
+        original: project.image,
+        resolved: resolvedUrl,
+        final: finalUrl
+      });
       setBackgroundImageUrl(finalUrl);
+    } else {
+      console.log('No image for project:', project.artist);
+      setBackgroundImageUrl('');
     }
     
     // Agregar clase has-active al contenedor
