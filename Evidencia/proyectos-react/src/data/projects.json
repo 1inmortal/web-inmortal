@@ -228,6 +228,18 @@
     "categoryFilter": "gsap"
   },
   {
+    "id": 23,
+    "artist": "Mantenimiento",
+    "album": "Mantenimiento Premium de Laptops",
+    "category": "WEB APP",
+    "label": "TechRepair",
+    "year": "2025",
+    "image": "img/png/laptop .png",
+    "sound": "mp3/hover.mp3",
+    "link": "https://1inmortal.github.io/web-inmortal/mantenimiento/",
+    "categoryFilter": "gsap"
+  },
+  {
     "id": 20,
     "artist": "DIALE",
     "album": "FRAGMENTS",
