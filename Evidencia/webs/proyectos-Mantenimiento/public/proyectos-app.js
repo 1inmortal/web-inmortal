@@ -117,9 +117,18 @@
         screenPivot.position.set(0, 0.075, -1);
         laptopGroup.add(screenPivot);
 
-        // Cargar modelo laptop_dell_xps.glb
+        // Cargar modelo laptop_dell_xps.glb (base path para GitHub Pages)
+        var glbBase = '/';
+        (function () {
+            var scripts = document.querySelectorAll('script[src*="proyectos-app.js"]');
+            if (scripts.length) {
+                var url = new URL(scripts[scripts.length - 1].src);
+                glbBase = url.pathname.replace(/proyectos-app\.js.*$/, '');
+                if (!glbBase.endsWith('/')) glbBase += '/';
+            }
+        })();
         const gltfLoader = new THREE.GLTFLoader();
-        gltfLoader.load('/laptop_dell_xps.glb', function (gltf) {
+        gltfLoader.load(glbBase + 'laptop_dell_xps.glb', function (gltf) {
             const model = gltf.scene;
             model.traverse(function (child) {
                 if (child.isMesh) {
