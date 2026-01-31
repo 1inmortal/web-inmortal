@@ -14,7 +14,7 @@ function App() {
       window.__proyectosAppLoaded = true;
 
       const script = document.createElement('script');
-      script.src = '/proyectos-app.js';
+      script.src = `${import.meta.env.BASE_URL}proyectos-app.js`;
       script.async = false;
       script.onload = () => console.log('✓ proyectos-app.js cargado');
       script.onerror = (e) => console.error('✗ Error cargando proyectos-app.js', e);
