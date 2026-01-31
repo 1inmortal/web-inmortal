@@ -72,6 +72,14 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build Mantenimiento App
+        working-directory: ./Evidencia/webs/proyectos-Mantenimiento
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          npm ci
+          npm run build
+
       - name: Copy Certificates to Portfolio Dist
         run: |
           # Copiar los archivos de certificados al dist del portfolio
@@ -94,6 +102,11 @@ jobs:
         run: |
           mkdir -p portfolio-react/dist/titan-x1
           cp -r Evidencia/webs/proyectos-TITAN\ X1/dist/* portfolio-react/dist/titan-x1/
+
+      - name: Copy Mantenimiento to Portfolio Dist
+        run: |
+          mkdir -p portfolio-react/dist/mantenimiento
+          cp -r Evidencia/webs/proyectos-Mantenimiento/dist/* portfolio-react/dist/mantenimiento/
 
       - name: Create .nojekyll file
         working-directory: ./portfolio-react/dist
