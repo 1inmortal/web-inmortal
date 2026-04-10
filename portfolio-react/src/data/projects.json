@@ -31,13 +31,13 @@
   },
   {
     "id": 4,
-    "title": "Video Sync Panel",
-    "category": "CV / Video Sync",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-    "description": "Sistema interactivo de análisis de video con checkpoints y seguimiento en tiempo real.",
-    "technologies": ["JavaScript", "HTML5", "Video API"],
-    "status": "INTERACTIVE",
-    "link": "#"
+    "title": "MultiCam AI Industrial",
+    "category": "Computer Vision / AI",
+    "image": "https://images.unsplash.com/photo-1557597774-9d2739f85a76?q=80&w=1000&auto=format&fit=crop",
+    "description": "Sistema de visión artificial para seguridad perimetral. Transforma flujos RTSP legacy en alertas tácticas mediante YOLOv8 On-Premise.",
+    "technologies": ["OpenCV", "Python", "Vite/React", "GSAP"],
+    "status": "LIVE",
+    "link": "./multicam/"
   },
   {
     "id": 5,
