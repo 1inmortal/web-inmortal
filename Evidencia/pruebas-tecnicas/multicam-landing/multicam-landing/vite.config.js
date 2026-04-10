@@ -8,7 +8,8 @@ function getBasePath() {
     if (repoName === `${username}.github.io`) {
       return '/'
     }
-    return `/${repoName}/`
+    // Como se despliega en una subcarpeta 'multicam' dentro del repo
+    return `/${repoName}/multicam/`
   }
   return '/'
 }
