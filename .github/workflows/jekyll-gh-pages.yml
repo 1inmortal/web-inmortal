@@ -80,6 +80,14 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build MultiCam Landing
+        working-directory: ./Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          npm ci
+          npm run build
+
       - name: Copy Certificates to Portfolio Dist
         run: |
           # Copiar los archivos de certificados al dist del portfolio
@@ -107,6 +115,11 @@ jobs:
         run: |
           mkdir -p portfolio-react/dist/mantenimiento
           cp -r Evidencia/webs/proyectos-Mantenimiento/dist/* portfolio-react/dist/mantenimiento/
+
+      - name: Copy MultiCam Landing to Portfolio Dist
+        run: |
+          mkdir -p portfolio-react/dist/multicam
+          cp -r Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing/dist/* portfolio-react/dist/multicam/
 
       - name: Create .nojekyll file
         working-directory: ./portfolio-react/dist
