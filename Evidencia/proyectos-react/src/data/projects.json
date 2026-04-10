@@ -274,5 +274,17 @@
     "sound": "mp3/hover.mp3",
     "link": "https://1inmortal.github.io/web-inmortal/titan-x1/",
     "categoryFilter": "gsap"
+  },
+  {
+    "id": 24,
+    "artist": "MultiCam AI",
+    "album": "Industrial Surveillance",
+    "category": "WEB APP",
+    "label": "AI Ops",
+    "year": "2025",
+    "image": "https://images.unsplash.com/photo-1557597774-9d2739f85a76?q=80&w=1000&auto=format&fit=crop",
+    "sound": "mp3/hover.mp3",
+    "link": "https://1inmortal.github.io/web-inmortal/multicam/",
+    "categoryFilter": "gsap"
   }
 ]

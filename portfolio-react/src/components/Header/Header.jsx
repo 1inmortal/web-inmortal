@@ -166,6 +166,29 @@ const Header = () => {
     return `https://${GITHUB_USER}.github.io/${REPO_NAME}/${PROJECTS_PATH}/index.html`;
   };
 
+  // Función para obtener la URL de MultiCam según el entorno
+  const getMultiCamUrl = () => {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:5173'; // puerto por defecto de vite para multicam
+    }
+    
+    const REPO_NAME = 'web-inmortal';
+    const MULTICAM_PATH = 'multicam';
+    const hostname = window.location.hostname;
+    
+    if (hostname.includes('github.io')) {
+      const parts = hostname.split('.');
+      if (parts.length >= 2) {
+        const githubUser = parts[0];
+        const pathname = window.location.pathname;
+        const pathSegments = pathname.split('/').filter(p => p);
+        const currentRepo = pathSegments[0] || REPO_NAME;
+        return `https://${githubUser}.github.io/${currentRepo}/${MULTICAM_PATH}/index.html`;
+      }
+    }
+    return `https://1inmortal.github.io/web-inmortal/${MULTICAM_PATH}/index.html`;
+  };
+
   // Enlaces de navegación
   // Para enlaces externos, usa la URL completa (ej: 'https://otra-app.com')
   // Para enlaces internos, usa anclas (ej: '#inicio')
@@ -177,6 +200,7 @@ const Header = () => {
     { name: 'Servicios', href: '#servicios' },
     { name: 'Proyectos', href: getProjectsUrl() }, // App de proyectos-react
     { name: 'Certificados', href: getCertificatesUrl() },
+    { name: 'MultiCam AI', href: getMultiCamUrl() },
     { name: 'Contacto', href: '#contacto' },
   ];
 
