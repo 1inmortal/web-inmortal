@@ -1,56 +1,58 @@
-# Configuración para GitHub Pages
-# El código fuente (src/) debe estar en el repo para que GitHub Actions pueda construir
-# GitHub Pages solo servirá los archivos compilados de dist/
+# ============================================================
+# .gitignore - web-inmortal
+# El CI/CD construye los dist/ automaticamente, no se commitean
+# ============================================================
 
-# Excluir solo archivos temporales y dependencias
-portfolio-react/node_modules/
-portfolio-react/.vscode/
-portfolio-react/.idea/
-portfolio-react/dist/  # Se genera automáticamente en el workflow
+# Dependencias
+node_modules/
+**/node_modules/
 
-# El código fuente (src/) y archivos de configuración se INCLUYEN
-# para que GitHub Actions pueda construir el proyecto automáticamente
+# Builds generados por CI - NO commitear, se generan automaticamente
+dist/
+**/dist/
+build/
+**/build/
 
-# Logs y archivos temporales
+# Variables de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# Archivos del sistema
+# Editor y sistema operativo
 .DS_Store
+.vscode/
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+Thumbs.db
 
-# INCLUIR archivos necesarios para el build y despliegue
-!portfolio-react/dist/
-!portfolio-react/dist/**
-!portfolio-react/DEPLOY.md
-!portfolio-react/package.json
-!portfolio-react/package-lock.json
-!portfolio-react/vite.config.js
-!portfolio-react/tailwind.config.js
-!portfolio-react/postcss.config.js
-!portfolio-react/eslint.config.js
-!portfolio-react/index.html
+# Cache de herramientas
+.eslintcache
+.stylelintcache
+.cache/
+.parcel-cache/
+.vite/
+**/.vite/
 
-# INCLUIR archivos compilados de certificados
-!Evidencia/certificates-app/dist/
-!Evidencia/certificates-app/dist/**
+# Cobertura de tests
+coverage/
+**/coverage/
+.nyc_output/
 
-# INCLUIR archivos compilados de proyectos
-!Evidencia/proyectos-react/dist/
-!Evidencia/proyectos-react/dist/**
-
-# INCLUIR archivos compilados de cenaduria
-!Evidencia/webs/cenaduria/react-app/dist/
-!Evidencia/webs/cenaduria/react-app/dist/**
-
-!.github/
-!.github/**
-
-# Excluir dist antiguo en la raíz (si existe)
-/dist/
+# Temporales
+*.tmp
+*.temp
+.temp/
+.tmp/
