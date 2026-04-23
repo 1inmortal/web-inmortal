@@ -18,10 +18,11 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node,
-        // Globals de GSAP cargados via CDN
+        // Globals de librerias cargadas via CDN
         gsap: 'readonly',
         ScrollTrigger: 'readonly',
         ScrollToPlugin: 'readonly',
+        Lenis: 'readonly',
       },
       parserOptions: {
         ecmaVersion: 'latest',
@@ -32,6 +33,23 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    },
+  },
+  // Archivos del public/ son scripts standalone (no modulos ES)
+  {
+    files: ['public/**/*.js'],
+    languageOptions: {
+      sourceType: 'script',
+      globals: {
+        ...globals.browser,
+        gsap: 'readonly',
+        ScrollTrigger: 'readonly',
+        ScrollToPlugin: 'readonly',
+        Lenis: 'readonly',
+      },
+    },
+    rules: {
+      'no-unused-vars': 'warn',
     },
   },
 ])
