@@ -28,10 +28,15 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      // Desactivar reglas que conflictuan con patrones de hooks custom
       'no-use-before-define': 'off',
-      'react-hooks/rules-of-hooks': 'warn',
       'react-hooks/exhaustive-deps': 'warn',
+    },
+  },
+  // Override separado para que tome precedencia sobre extends
+  {
+    files: ['**/*.{js,jsx}'],
+    rules: {
+      'react-hooks/rules-of-hooks': 'warn',
     },
   },
 ])
