@@ -85,14 +85,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: Evidencia/cenaduria/package-lock.json
+          cache-dependency-path: Evidencia/webs/cenaduria/react-app/package-lock.json
 
       - name: Install dependencies
-        working-directory: ./Evidencia/cenaduria
+        working-directory: ./Evidencia/webs/cenaduria/react-app
         run: npm ci
 
       - name: Run ESLint
-        working-directory: ./Evidencia/cenaduria
+        working-directory: ./Evidencia/webs/cenaduria/react-app
         run: npm run lint --if-present
 
   lint-multicam:
@@ -107,14 +107,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: Evidencia/multicam-landing/package-lock.json
+          cache-dependency-path: Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing/package-lock.json
 
       - name: Install dependencies
-        working-directory: ./Evidencia/multicam-landing
+        working-directory: ./Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing
         run: npm ci
 
       - name: Run ESLint
-        working-directory: ./Evidencia/multicam-landing
+        working-directory: ./Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing
         run: npm run lint --if-present
 
   notify-failure:
