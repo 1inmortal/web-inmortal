@@ -1,0 +1,79 @@
+version: 2
+updates:
+  # Portfolio principal
+  - package-ecosystem: "npm"
+    directory: "/portfolio-react"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Monterrey"
+    labels:
+      - "dependencies"
+      - "npm"
+    open-pull-requests-limit: 5
+
+  # Certificates App
+  - package-ecosystem: "npm"
+    directory: "/Evidencia/certificates-app"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Monterrey"
+    labels:
+      - "dependencies"
+      - "npm"
+    open-pull-requests-limit: 5
+
+  # Proyectos React
+  - package-ecosystem: "npm"
+    directory: "/Evidencia/proyectos-react"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Monterrey"
+    labels:
+      - "dependencies"
+      - "npm"
+    open-pull-requests-limit: 5
+
+  # Cenaduria
+  - package-ecosystem: "npm"
+    directory: "/Evidencia/cenaduria"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Monterrey"
+    labels:
+      - "dependencies"
+      - "npm"
+    open-pull-requests-limit: 5
+
+  # Multicam Landing
+  - package-ecosystem: "npm"
+    directory: "/Evidencia/multicam-landing"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Monterrey"
+    labels:
+      - "dependencies"
+      - "npm"
+    open-pull-requests-limit: 5
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Monterrey"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    open-pull-requests-limit: 5
