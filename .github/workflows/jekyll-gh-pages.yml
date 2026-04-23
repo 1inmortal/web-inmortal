@@ -83,10 +83,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: Evidencia/cenaduria/package-lock.json
+          cache-dependency-path: Evidencia/webs/cenaduria/react-app/package-lock.json
 
       - name: Install & Build
-        working-directory: ./Evidencia/cenaduria
+        working-directory: ./Evidencia/webs/cenaduria/react-app
         run: |
           npm ci
           npm run build
@@ -95,7 +95,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cenaduria-dist
-          path: Evidencia/cenaduria/dist
+          path: Evidencia/webs/cenaduria/react-app/dist
           retention-days: 1
 
   build-titan:
@@ -110,10 +110,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: "Evidencia/TITAN X1/package-lock.json"
+          cache-dependency-path: "Evidencia/webs/proyectos-TITAN X1/package-lock.json"
 
       - name: Install & Build
-        working-directory: "./Evidencia/TITAN X1"
+        working-directory: "./Evidencia/webs/proyectos-TITAN X1"
         run: |
           npm ci
           npm run build
@@ -122,7 +122,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: titan-dist
-          path: "Evidencia/TITAN X1/dist"
+          path: "Evidencia/webs/proyectos-TITAN X1/dist"
           retention-days: 1
 
   build-mantenimiento:
@@ -137,10 +137,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: Evidencia/Mantenimiento/package-lock.json
+          cache-dependency-path: Evidencia/webs/proyectos-Mantenimiento/package-lock.json
 
       - name: Install & Build
-        working-directory: ./Evidencia/Mantenimiento
+        working-directory: ./Evidencia/webs/proyectos-Mantenimiento
         run: |
           npm ci
           npm run build
@@ -149,7 +149,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mantenimiento-dist
-          path: Evidencia/Mantenimiento/dist
+          path: Evidencia/webs/proyectos-Mantenimiento/dist
           retention-days: 1
 
   build-multicam:
@@ -164,10 +164,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: Evidencia/multicam-landing/package-lock.json
+          cache-dependency-path: Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing/package-lock.json
 
       - name: Install & Build
-        working-directory: ./Evidencia/multicam-landing
+        working-directory: ./Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing
         run: |
           npm ci
           npm run build
@@ -176,7 +176,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: multicam-dist
-          path: Evidencia/multicam-landing/dist
+          path: Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing/dist
           retention-days: 1
 
   # ─── Build portfolio principal + ensamblar todo ───────────
