@@ -28,6 +28,8 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      // Permite hoisting de funciones/consts en patrones de hooks de React
+      'no-use-before-define': ['warn', { functions: false, classes: false, variables: false }],
     },
   },
 ])
