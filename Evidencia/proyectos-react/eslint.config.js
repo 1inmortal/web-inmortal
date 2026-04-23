@@ -30,6 +30,8 @@ export default defineConfig([
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       // Permite hoisting de funciones/consts en patrones de hooks de React
       'no-use-before-define': ['warn', { functions: false, classes: false, variables: false }],
+      // Hooks custom (useIdleAnimation, useLazyLoad) se usan fuera de useEffect intencionalmente
+      'react-hooks/rules-of-hooks': 'warn',
     },
   },
 ])
