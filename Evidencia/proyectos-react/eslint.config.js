@@ -28,10 +28,10 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      // Permite hoisting de funciones/consts en patrones de hooks de React
-      'no-use-before-define': ['warn', { functions: false, classes: false, variables: false }],
-      // Hooks custom (useIdleAnimation, useLazyLoad) se usan fuera de useEffect intencionalmente
+      // Desactivar reglas que conflictuan con patrones de hooks custom
+      'no-use-before-define': 'off',
       'react-hooks/rules-of-hooks': 'warn',
+      'react-hooks/exhaustive-deps': 'warn',
     },
   },
 ])
