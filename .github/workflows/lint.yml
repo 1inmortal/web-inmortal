@@ -1,0 +1,136 @@
+name: CI - Lint & Quality Check
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-portfolio:
+    name: Lint portfolio-react
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: portfolio-react/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./portfolio-react
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./portfolio-react
+        run: npm run lint
+
+  lint-certificates:
+    name: Lint certificates-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/certificates-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./Evidencia/certificates-app
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./Evidencia/certificates-app
+        run: npm run lint --if-present
+
+  lint-proyectos:
+    name: Lint proyectos-react
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/proyectos-react/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./Evidencia/proyectos-react
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./Evidencia/proyectos-react
+        run: npm run lint --if-present
+
+  lint-cenaduria:
+    name: Lint cenaduria
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/cenaduria/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./Evidencia/cenaduria
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./Evidencia/cenaduria
+        run: npm run lint --if-present
+
+  lint-multicam:
+    name: Lint multicam-landing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/multicam-landing/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./Evidencia/multicam-landing
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./Evidencia/multicam-landing
+        run: npm run lint --if-present
+
+  notify-failure:
+    name: Notify on Failure
+    runs-on: ubuntu-latest
+    needs: [lint-portfolio, lint-certificates, lint-proyectos, lint-cenaduria, lint-multicam]
+    if: failure()
+    steps:
+      - name: Create failure issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `CI Lint Failed - ${new Date().toISOString().split('T')[0]}`,
+              body: `El workflow de linting ha fallado en el commit ${context.sha}.\n\nRevisa los logs: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              labels: ['bug', 'ci']
+            })
