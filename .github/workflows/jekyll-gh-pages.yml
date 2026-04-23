@@ -16,124 +16,229 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  # ─── Build sub-proyectos en paralelo ──────────────────────
+  build-certificates:
+    name: Build certificates-app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js + cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/certificates-app/package-lock.json
+
+      - name: Install & Build
+        working-directory: ./Evidencia/certificates-app
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: certificates-dist
+          path: Evidencia/certificates-app/dist
+          retention-days: 1
+
+  build-proyectos:
+    name: Build proyectos-react
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js + cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/proyectos-react/package-lock.json
+
+      - name: Install & Build
+        working-directory: ./Evidencia/proyectos-react
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: proyectos-dist
+          path: Evidencia/proyectos-react/dist
+          retention-days: 1
+
+  build-cenaduria:
+    name: Build cenaduria
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js + cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/cenaduria/package-lock.json
+
+      - name: Install & Build
+        working-directory: ./Evidencia/cenaduria
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cenaduria-dist
+          path: Evidencia/cenaduria/dist
+          retention-days: 1
+
+  build-titan:
+    name: Build TITAN X1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js + cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: "Evidencia/TITAN X1/package-lock.json"
+
+      - name: Install & Build
+        working-directory: "./Evidencia/TITAN X1"
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: titan-dist
+          path: "Evidencia/TITAN X1/dist"
+          retention-days: 1
+
+  build-mantenimiento:
+    name: Build Mantenimiento
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js + cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/Mantenimiento/package-lock.json
+
+      - name: Install & Build
+        working-directory: ./Evidencia/Mantenimiento
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mantenimiento-dist
+          path: Evidencia/Mantenimiento/dist
+          retention-days: 1
+
+  build-multicam:
+    name: Build multicam-landing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js + cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Evidencia/multicam-landing/package-lock.json
+
+      - name: Install & Build
+        working-directory: ./Evidencia/multicam-landing
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: multicam-dist
+          path: Evidencia/multicam-landing/dist
+          retention-days: 1
+
+  # ─── Build portfolio principal + ensamblar todo ───────────
+  build:
+    name: Build portfolio + assemble
+    runs-on: ubuntu-latest
+    needs:
+      - build-certificates
+      - build-proyectos
+      - build-cenaduria
+      - build-titan
+      - build-mantenimiento
+      - build-multicam
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js + cache
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: portfolio-react/package-lock.json
 
-      - name: Install dependencies
+      - name: Install & Build portfolio
         working-directory: ./portfolio-react
-        run: npm ci
-
-      - name: Build Portfolio
-        working-directory: ./portfolio-react
-        env:
-          # Pasar el nombre del repositorio para configurar el base path
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: npm run build
-
-      - name: Build Certificates App
-        working-directory: ./Evidencia/certificates-app
         run: |
           npm ci
           npm run build
 
-      - name: Build Projects App
-        working-directory: ./Evidencia/proyectos-react
-        env:
-          # Pasar el nombre del repositorio para configurar el base path
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          npm ci
-          npm run build
+      - name: Download all sub-project artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
 
-      - name: Build Cenaduria App
-        working-directory: ./Evidencia/webs/cenaduria/react-app
-        env:
-          # Pasar el nombre del repositorio para configurar el base path
-          GITHUB_REPOSITORY: ${{ github.repository }}
+      - name: Assemble dist
         run: |
-          npm ci
-          npm run build
-
-      - name: Build TITAN X1 App
-        working-directory: ./Evidencia/webs/proyectos-TITAN X1
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          npm ci
-          npm run build
-
-      - name: Build Mantenimiento App
-        working-directory: ./Evidencia/webs/proyectos-Mantenimiento
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          npm ci
-          npm run build
-
-      - name: Build MultiCam Landing
-        working-directory: ./Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          npm ci
-          npm run build
-
-      - name: Copy Certificates to Portfolio Dist
-        run: |
-          # Copiar los archivos de certificados al dist del portfolio
           mkdir -p portfolio-react/dist/certificados
-          cp -r Evidencia/certificates-app/dist/* portfolio-react/dist/certificados/
-
-      - name: Copy Projects to Portfolio Dist
-        run: |
-          # Copiar los archivos de proyectos al dist del portfolio
           mkdir -p portfolio-react/dist/proyectos
-          cp -r Evidencia/proyectos-react/dist/* portfolio-react/dist/proyectos/
-
-      - name: Copy Cenaduria to Portfolio Dist
-        run: |
-          # Copiar los archivos de cenaduria al dist del portfolio
           mkdir -p portfolio-react/dist/cenaduria
-          cp -r Evidencia/webs/cenaduria/react-app/dist/* portfolio-react/dist/cenaduria/
-
-      - name: Copy TITAN X1 to Portfolio Dist
-        run: |
           mkdir -p portfolio-react/dist/titan-x1
-          cp -r Evidencia/webs/proyectos-TITAN\ X1/dist/* portfolio-react/dist/titan-x1/
-
-      - name: Copy Mantenimiento to Portfolio Dist
-        run: |
           mkdir -p portfolio-react/dist/mantenimiento
-          cp -r Evidencia/webs/proyectos-Mantenimiento/dist/* portfolio-react/dist/mantenimiento/
-
-      - name: Copy MultiCam Landing to Portfolio Dist
-        run: |
           mkdir -p portfolio-react/dist/multicam
-          cp -r Evidencia/pruebas-tecnicas/multicam-landing/multicam-landing/dist/* portfolio-react/dist/multicam/
-
-      - name: Create .nojekyll file
-        working-directory: ./portfolio-react/dist
-        run: touch .nojekyll
+          cp -r ./artifacts/certificates-dist/. portfolio-react/dist/certificados/
+          cp -r ./artifacts/proyectos-dist/. portfolio-react/dist/proyectos/
+          cp -r ./artifacts/cenaduria-dist/. portfolio-react/dist/cenaduria/
+          cp -r ./artifacts/titan-dist/. portfolio-react/dist/titan-x1/
+          cp -r ./artifacts/mantenimiento-dist/. portfolio-react/dist/mantenimiento/
+          cp -r ./artifacts/multicam-dist/. portfolio-react/dist/multicam/
+          touch portfolio-react/dist/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './portfolio-react/dist'
 
+  # ─── Deploy ───────────────────────────────────────────────
   deploy:
+    name: Deploy to GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -143,3 +248,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ─── Notificacion de fallo ────────────────────────────────
+  notify-failure:
+    name: Notify on Deploy Failure
+    runs-on: ubuntu-latest
+    needs: [build-certificates, build-proyectos, build-cenaduria, build-titan, build-mantenimiento, build-multicam, build, deploy]
+    if: failure()
+    steps:
+      - name: Create failure issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Deploy Failed - ${new Date().toISOString().split('T')[0]}`,
+              body: `El workflow de deploy ha fallado.\n\n**Commit:** ${context.sha}\n**Rama:** ${context.ref}\n\n**Ver logs:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              labels: ['bug', 'ci']
+            })
