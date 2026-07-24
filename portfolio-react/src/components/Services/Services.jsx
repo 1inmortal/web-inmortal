@@ -1,94 +1,84 @@
 import React, { useEffect, useRef } from 'react';
-import { Globe, Brain, Box, Code2 } from 'lucide-react';
-import servicesData from '../../data/services.json';
-import './Services.module.css';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-/**
- * Services Component
- * Muestra los servicios ofrecidos con íconos y descripciones
- */
-const Services = () => {
-  const sectionRef = useRef(null);
+gsap.registerPlugin(ScrollTrigger);
 
-  const iconMap = {
-    blockchain: Globe,
-    brain: Brain,
-    cube: Box,
-    globe: Globe,
-  };
+export default function Services() {
+  const services = [
+    {
+      title: "Dirección Creativa",
+      desc: "Definición del tono visual, narrativa digital, principios de composición y dirección estética para experiencias web premium."
+    },
+    {
+      title: "Arquitectura de Interfaces",
+      desc: "Diseño de estructuras, jerarquías, cuadrículas, patrones de UI y sistemas visuales para productos con altos estándares de claridad y rendimiento."
+    },
+    {
+      title: "Sistemas de Diseño de Movimiento",
+      desc: "Construcción de transiciones, narración mediante scroll, secuencias de entrada y micro-interacciones que convierten las interfaces en experiencias coreografiadas."
+    },
+    {
+      title: "WebGL / Capas Espaciales",
+      desc: "Integración de escenas 3D, partículas, profundidad visual y recursos inmersivos para elevar la presencia de la marca y la sensación tecnológica."
+    },
+    {
+      title: "Ejecución Frontend Premium",
+      desc: "Implementación de experiencias avanzadas con énfasis en la fluidez, el detalle tipográfico, el comportamiento interactivo y la coherencia visual."
+    }
+  ];
+
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+    let ctx = gsap.context(() => {
+      // Animación de entrada para los elementos de la lista
+      gsap.fromTo('.service-item', 
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 75%',
           }
-        });
-      },
-      { threshold: 0.1 }
-    );
+        }
+      );
+    }, containerRef);
 
-    if (sectionRef.current) {
-      const elements = sectionRef.current.querySelectorAll('.scroll-reveal');
-      elements.forEach((el) => observer.observe(el));
-    }
-
-    return () => observer.disconnect();
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      id="servicios"
-      ref={sectionRef}
-      className="py-24 bg-slate-900/30"
-    >
-      <div className="container mx-auto px-6">
-        <div className="mb-16 text-center animate-fade-in-up">
-          <span className="text-cyan-400 font-mono text-sm tracking-widest uppercase block mb-2">
-            Servicios
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white relative inline-block">
-            Lo que ofrezco
-            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-transparent rounded-full"></span>
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {servicesData.map((service, index) => {
-            const IconComponent =
-              iconMap[service.icon] || Code2;
-            return (
-              <div
-                key={service.id}
-                className="scroll-reveal bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/30 transition-all duration-300 group hover:-translate-y-2"
-              >
-                <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center text-cyan-400 mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-colors">
-                  <IconComponent size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                  {service.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {service.technologies.slice(0, 3).map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-1 bg-slate-800/50 border border-slate-700 rounded text-xs text-slate-300 font-mono"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+    <section ref={containerRef} id="services" className="relative py-32 lg:py-48 px-[5vw] flex flex-col justify-start">
+      <div className="w-full max-w-[1400px] mx-auto">
+        <span className="font-mono text-xs uppercase tracking-[2px] text-[var(--accent-dim)] block mb-8">
+          03 / Capacidad
+        </span>
+        <h2 className="font-display text-[clamp(2.5rem,5vw,5rem)] leading-[1.15] mb-16 text-[var(--text)]">
+          Servicios Selectos
+        </h2>
+        
+        <div className="mt-12 border-t border-[var(--border)]">
+          {services.map((srv, i) => (
+            <div 
+              key={i} 
+              data-cursor="CAPACITY"
+              className="service-item group grid grid-cols-1 md:grid-cols-[minmax(220px,0.95fr)_minmax(0,2.05fr)] gap-8 md:gap-16 py-12 md:py-16 border-b border-[var(--border)] transition-all duration-500 ease-out hover:pl-8 hover:bg-gradient-to-r hover:from-[rgba(255,255,255,0.02)] hover:to-transparent"
+            >
+              <h3 className="font-display text-[2rem] md:text-[2.5rem] font-normal leading-[1.15] text-[var(--text)] group-hover:italic group-hover:text-[var(--accent)] transition-all duration-300">
+                {srv.title}
+              </h3>
+              <p className="font-body text-[1.1rem] md:text-[1.25rem] leading-[1.8] opacity-80 font-light text-[var(--text)] pt-2">
+                {srv.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Services;
+}
